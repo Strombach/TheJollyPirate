@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Dwayne Johnson",
+    "p.n": "19720502-1234",
+    "boats": [
+      {
+        "type": "MotorBoat",
+        "cm": 200,
+        "id": 1234
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Morgan Freeman",
+    "p.n": "19370601-5678",
+    "boats": [
+      {
+        "type": "Sailboat",
+        "cm": 500,
+        "id": 5678
+      }
+    ]
+  }
+]
