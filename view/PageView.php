@@ -14,6 +14,9 @@ class PageView {
           <div class="container">
             <p>This is the beginning</p>
             ' . $v->response() . '
+            <ol>
+            ' . $v->createList() . '
+            </ol>
           </div>
         </body>
       </html>
