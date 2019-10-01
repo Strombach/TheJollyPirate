@@ -10,4 +10,4 @@ ini_set('display_errors', 'On');
 $pageView = new PageView();
 $listView = new ListView();
 
-$pageView->render();
+$pageView->render($listView);

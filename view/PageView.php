@@ -2,7 +2,7 @@
 
 class PageView {
 
-  public function render () {
+  public function render ($v) {
     echo '<!DOCTYPE html
       <html>
         <head>
@@ -13,6 +13,7 @@ class PageView {
           <h1>The Jolly Pirate</h1>
           <div class="container">
             <p>This is the beginning</p>
+            ' . $v->response() . '
           </div>
         </body>
       </html>
