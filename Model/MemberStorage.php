@@ -1,5 +1,7 @@
 <?php
 
+namespace Model;
+
 class MemberStorage {
   private $jsonFile;
   private $phpObj;
