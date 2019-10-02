@@ -16,8 +16,12 @@ class PageView {
           <div class="container">
             <p>This is the beginning</p>
             ' . $v->response() . '
+            <h2>Compact List:</h2>
             <ol>
             ' . $v->createCompactList() . '
+            </ol>
+            <h2>Verbose List:</h2>
+            <ol>
             ' . $v->createVerboseList() . '
             </ol>
           </div>
