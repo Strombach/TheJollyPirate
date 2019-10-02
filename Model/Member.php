@@ -10,9 +10,6 @@ class Member
   private $boats;
 
 
-  public function __construct()
-  { }
-
 
   public function setID(int $ID): void
   {
@@ -28,6 +25,7 @@ class Member
   {
     $this->personalNumber = $personalNumber;
   }
+
 
 
   public function getID(): int
@@ -49,6 +47,7 @@ class Member
   {
     return count($this->boats);
   }
+
 
 
   public function addBoat(\Model\Boat $newBoat): void
