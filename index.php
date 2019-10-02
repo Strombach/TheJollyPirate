@@ -1,8 +1,8 @@
 <?php
 
-require_once('view/PageView.php');
-require_once('view/ListView.php');
-require_once('model/MemberStorage.php');
+require_once('View/PageView.php');
+require_once('View/ListView.php');
+require_once('Model/MemberStorage.php');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
