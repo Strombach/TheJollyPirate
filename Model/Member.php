@@ -9,13 +9,19 @@ class Member
   private $personalNumber;
   private $boats;
 
+
   public function __construct()
   { }
+
+
+  public function setID(): int
+  {
+    return $this->ID;
+  }
+
 
   public function getID(): int
   {
     return $this->ID;
   }
 }
-
-// DENNIS
