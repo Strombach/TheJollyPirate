@@ -6,7 +6,7 @@
     "boats": [
       {
         "type": "MotorBoat",
-        "cm": 200,
+        "cm": 300,
         "id": 1234
       }
     ]
@@ -20,6 +20,11 @@
         "type": "Sailboat",
         "cm": 500,
         "id": 5678
+      },
+      {
+        "type": "Kayak",
+        "cm": 200,
+        "id": 9876
       }
     ]
   }

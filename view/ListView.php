@@ -18,7 +18,7 @@ class ListView {
     $listString = '';
     for ($i = 0; $i < sizeof($this->memberStorage); $i++) {
       $name = $this->memberStorage[$i]->name;
-      $listString .= "<li>$name</li>";
+      $listString .= "<li>$name has " . sizeof($this->memberStorage[$i]->boats) . " boat.</li>";
     }
     return $listString;
   }
