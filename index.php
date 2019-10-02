@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
 $pageView = new PageView();
-$listView = new ListView(new MemberStorage('database.json'));
+$listView = new \View\ListView(new \Model\MemberStorage('database.json'));
 
 $pageView->render($listView);
 
