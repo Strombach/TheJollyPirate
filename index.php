@@ -11,5 +11,3 @@ $pageView = new PageView();
 $listView = new ListView(new MemberStorage('database.json'));
 
 $pageView->render($listView);
-
-// dennis branch
