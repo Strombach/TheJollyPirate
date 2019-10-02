@@ -2,9 +2,18 @@
 
 namespace Model;
 
-class Member {
+class Member
+{
+  private $ID;
+  private $name;
+  private $personalNumber;
+  private $boats;
 
-  public function __construct () {
+  public function __construct()
+  { }
 
+  public function getID(): int
+  {
+    return $this->ID;
   }
 }
