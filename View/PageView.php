@@ -2,9 +2,11 @@
 
 namespace View;
 
-class PageView {
+class PageView
+{
 
-  public function render ($v) {
+  public function render($v)
+  {
     echo '<!DOCTYPE html
       <html>
         <head>
@@ -13,20 +15,27 @@ class PageView {
         </head>
         <body>
           <h1>The Jolly Pirate</h1>
+          <a href="?verbose">Verbose List</a>
+          <a href="?compact">Compact List</a>
           <div class="container">
             <p>This is the beginning</p>
             ' . $v->response() . '
-            <h2>Compact List:</h2>
+            <h2>List:</h2>
+            ' . $this->wantVerbose($v) . '
             <ol>
-            ' . $v->createCompactList() . '
-            </ol>
-            <h2>Verbose List:</h2>
-            <ol>
-            ' . $v->createVerboseList() . '
             </ol>
           </div>
         </body>
       </html>
     ';
+  }
+
+  public function wantVerbose($v)
+  {
+    if (!isset($_GET["verbose"])) {
+      return $v->createCompactList();
+    } else {
+      return $v->createVerboseList();
+    }
   }
 }
