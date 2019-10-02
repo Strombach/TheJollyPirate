@@ -27,9 +27,6 @@ class PageView
           </div>
           <footer>
             <h3>Created By</h3>
-            <p>Dennis Fredsson (df222fx)</p>
-            <p>Fredrik Strömbäck (fs222uv)</p>
-            <p>Markus Öhlen (mo223dg)</p>
           </footer>
         </body>
       </html>
