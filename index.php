@@ -11,5 +11,3 @@ $pageView = new \View\PageView();
 $listView = new \View\ListView(new \Model\MemberStorage('database.json'));
 
 $pageView->render($listView);
-
-// dennis branch
