@@ -1,5 +1,7 @@
 <?php
 
+namespace View;
+
 class PageView {
 
   public function render ($v) {
