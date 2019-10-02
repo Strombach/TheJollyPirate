@@ -2,21 +2,25 @@
 
 namespace View;
 
-class ListView {
+class ListView
+{
 
-  private $memberStorage; 
+  private $memberStorage;
 
-  public function __construct ($ms) {
+  public function __construct($ms)
+  {
     $this->memberStorage = $ms->getData();
   }
 
-  public function response () {
+  public function response()
+  {
     return '
     <p>This is from the ListView class, awesome!</p>
     ';
   }
 
-  public function createCompactList() {
+  public function createCompactList()
+  {
     $listString = '';
     for ($i = 0; $i < sizeof($this->memberStorage); $i++) {
       $name = $this->memberStorage[$i]->name;
@@ -25,7 +29,8 @@ class ListView {
     return $listString;
   }
 
-  public function createVerboseList() {
+  public function createVerboseList()
+  {
     $listString = '';
     for ($i = 0; $i < sizeof($this->memberStorage); $i++) {
       $name = $this->memberStorage[$i]->name;
@@ -35,12 +40,13 @@ class ListView {
     return $listString;
   }
 
-  private function createBoatList($boatArr) {
+  private function createBoatList($boatArr)
+  {
     $listString = '';
     for ($i = 0; $i < sizeof($boatArr); $i++) {
       $type = $boatArr[$i]->type;
       $length = $boatArr[$i]->cm;
-      if($i > 0) {
+      if ($i > 0) {
         $listString .= " And a " . $type . " and the length is: $length cm<br>";
       } else {
         $listString .= "a " . $type . " and the length is: $length cm.";
