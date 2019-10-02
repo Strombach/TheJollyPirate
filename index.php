@@ -7,8 +7,7 @@ require_once('Model/MemberStorage.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-// $pageView = new \View\PageView();
-//$listView = new \View\ListView(new \Model\MemberStorage('database.json'));
+$pageView = new \View\PageView();
+$listView = new \View\ListView(new \Model\MemberStorage('database.json'));
 
-$memberStorage = new \Model\MemberStorage('database.json');
-// $pageView->render($listView);
+$pageView->render($listView);

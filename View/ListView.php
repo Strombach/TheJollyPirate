@@ -9,7 +9,7 @@ class ListView
 
   public function __construct($ms)
   {
-    $this->memberStorage = $ms->getData();
+    $this->memberStorage = $ms->getMembers();
   }
 
   public function response()

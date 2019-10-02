@@ -11,8 +11,11 @@ class MemberStorage
   {
     $this->jsonFile = file_get_contents($path, true);
     $this->members = json_decode($this->jsonFile);
+  }
 
-    var_dump($this->members);
+  public function getMembers(): array
+  {
+    return $this->members;
   }
 
   public function addMember(\Model\Member $newMember): void
