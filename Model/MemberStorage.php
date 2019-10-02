@@ -15,3 +15,5 @@ class MemberStorage {
     return $this->phpObj;
   }
 }
+
+// Fredde
