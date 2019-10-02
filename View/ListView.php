@@ -3,7 +3,6 @@
 namespace View;
 
 class ListView {
-  // Detta är en kommentar
 
   private $memberStorage; 
 
