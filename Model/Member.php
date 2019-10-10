@@ -9,7 +9,12 @@ class Member
   private $personalNumber;
   private $boats;
 
-
+  public function __construct ($ID, $name, $personalNumber, $boats) {
+    $this->ID = $ID;
+    $this->name = $name;
+    $this->personalNumber = $personalNumber;
+    $this->boats = $boats;
+  }
 
   public function setID(int $ID): void
   {

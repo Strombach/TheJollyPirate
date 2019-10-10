@@ -26,7 +26,7 @@ class PageView
             </ol>
           </div>
           <footer>
-            <h3>Created By </h3>
+            <h3>Created By</h3>
           </footer>
         </body>
       </html>
