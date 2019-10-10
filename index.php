@@ -15,9 +15,6 @@ $pageView = new \View\PageView();
 $listView = new \View\ListView($memberStorage);
 $memberView = new \View\MemberView($memberStorage);
 
-<<<<<<< HEAD
-$controller = new \Controller\Controller($listView, $pageView);
-=======
 $controller = new \Controller\Controller($listView, $pageView, $memberView);
 
 
@@ -27,5 +24,4 @@ if (!isset($_GET["member"])) {
   $controller->doRenderMemberView((int) $_GET["member"]);
 }
 
->>>>>>> master
 //$pageView->render($listView);

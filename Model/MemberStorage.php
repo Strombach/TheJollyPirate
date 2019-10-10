@@ -12,26 +12,12 @@ class MemberStorage
   {
     $this->jsonFile = file_get_contents($path, true);
     $this->membersJSONArray = json_decode($this->jsonFile);
-<<<<<<< HEAD
-    var_dump($this->membersJSONArray);
-=======
     $this->members = $this->getMemberObjectArray();
->>>>>>> master
   }
 
   public function getMemberObjectArray(): array
   {
     $memberObjectArray = array();
-<<<<<<< HEAD
-    for ($i=0; $i < sizeof($this->membersJSONArray); $i++) {
-      $ID = $this->membersJSONArray[$i]->id;
-      $name = $this->membersJSONArray[$i]->name;
-      $personalNumber = $this->membersJSONArray[$i]->p.n;
-      $boats = $this->membersJSONArray[$i]->boats;
-      array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
-    }
-    return $this->memberObjectArray;
-=======
     for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
       $ID = $this->membersJSONArray[$i]->id;
       $name = $this->membersJSONArray[$i]->name;
@@ -40,7 +26,6 @@ class MemberStorage
       array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
     }
     return $memberObjectArray;
->>>>>>> master
   }
 
   public function addMember(\Model\Member $newMember): void

@@ -9,12 +9,8 @@ class Member
   private $personalNumber;
   private $boats;
 
-<<<<<<< HEAD
-  public function __construct ($ID, $name, $personalNumber, $boats) {
-=======
   public function __construct($ID, $name, $personalNumber, $boats)
   {
->>>>>>> master
     $this->ID = $ID;
     $this->name = $name;
     $this->personalNumber = $personalNumber;
