@@ -4,11 +4,8 @@ require_once('View/PageView.php');
 require_once('View/ListView.php');
 require_once('Model/MemberStorage.php');
 require_once('Controller/Controller.php');
-<<<<<<< HEAD
-=======
 require_once('Model/Member.php');
 require_once('View/MemberView.php');
->>>>>>> master
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
