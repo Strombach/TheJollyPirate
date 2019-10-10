@@ -5,11 +5,12 @@ namespace View;
 class ListView
 {
 
-  private $memberStorage;
+  // private $memberStorage;
+  private $members;
 
   public function __construct($ms)
   {
-    $this->memberStorage = $ms->getMembers();
+    $this->members = $ms->getMemberObjectArray();
   }
 
   public function response()
@@ -31,9 +32,11 @@ class ListView
   public function createCompactList()
   {
     $listString = '';
-    for ($i = 0; $i < sizeof($this->memberStorage); $i++) {
-      $name = $this->memberStorage[$i]->name;
-      $listString .= "<li>$name has " . sizeof($this->memberStorage[$i]->boats) . " boat.</li>";
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      var_dump($this->members[$i]);
+      $name = $this->members[$i]->getName();
+      $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
+      <a href=''></a></li>";
     }
     return $listString;
   }
@@ -41,9 +44,9 @@ class ListView
   public function createVerboseList()
   {
     $listString = '';
-    for ($i = 0; $i < sizeof($this->memberStorage); $i++) {
-      $name = $this->memberStorage[$i]->name;
-      $boatList = $this->createBoatList($this->memberStorage[$i]->boats);
+    for ($i = 0; $i < sizeof($this->members); $i++) {
+      $name = $this->members[$i]->getName();
+      $boatList = $this->createBoatList($this->members[$i]->getBoats());
       $listString .= "<li>$name has " . $boatList . "</li>";
     }
     return $listString;
