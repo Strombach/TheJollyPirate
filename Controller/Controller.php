@@ -20,7 +20,7 @@ class Controller
   {
     if (!isset($_GET["member"])) {
       $this->doRenderListView();
-    } else {
+    } else if (isset($_GET["member"])) {
       $this->doRenderMemberView((int) $_GET["member"]);
     }
   }

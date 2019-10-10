@@ -15,9 +15,6 @@ class PageView
         </head>
         <body>
           <h1>The Jolly Pirate</h1>
-          <a href="?compact">Compact List</a>
-          <br>
-          <a href="?verbose">Verbose List</a>
           <div class="container">
             ' . $this->viewToRender($v) . '
           </div>

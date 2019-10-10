@@ -2,21 +2,12 @@
 
 namespace View;
 
-class MemberView
+class EditMemberView
 {
   private $ms;
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
-  }
-
-  // private function userWantsInfo () {
-  //   return $_GET["info"];
-  // }
-
-  private function userWantsToEdit()
-  {
-    return isset($_GET["member"]);
   }
 
   private function userWantsToSave()
@@ -35,12 +26,12 @@ class MemberView
     $pn = $member->getPersonalNumber();
     $boats = $member->getBoats();
 
-    $ret .= $this->showMemberInfo($name, $id, $pn, $boats);
+    $ret .= $this->editMemberInfo($name, $id, $pn, $boats);
 
     return $ret;
   }
 
-  private function showMemberInfo($name, $id, $pn, $boats)
+  private function editMemberInfo($name, $id, $pn, $boats)
   {
     $ret = "";
 
@@ -62,10 +53,5 @@ class MemberView
     return $ret;
   }
 
-  private function editMemberInfo($name, $id, $pn, $boats)
-  {
-    $ret = '';
 
-    return $ret;
-  }
 }

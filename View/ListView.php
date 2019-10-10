@@ -4,8 +4,6 @@ namespace View;
 
 class ListView
 {
-
-  // private $memberStorage;
   private $members;
 
   public function __construct($ms)
@@ -16,30 +14,20 @@ class ListView
   public function response()
   {
     $ret = '';
-    
-    if ($this->userWantsCompactList()) {
+
+    if ($this->userWantsCompactList() || $this->userEntersSite()) {
       $ret .= $this->createCompactList();
-    }
-    if ($this->userWantsVerboseList()) {
+    } else if ($this->userWantsVerboseList()) {
       $ret .= $this->createVerboseList();
     }
 
     return $ret;
   }
 
-  public function userWantsVerboseList(): bool
-  {
-    return isset($_GET["verbose"]);
-  }
-
-  public function userWantsCompactList(): bool
-  {
-    return isset($_GET["compact"]);
-  }
 
   public function createCompactList()
   {
-    $listString = '';
+    $listString = '<a href="?verbose">Verbose List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
@@ -52,7 +40,7 @@ class ListView
 
   public function createVerboseList()
   {
-    $listString = '';
+    $listString = '<a href="?compact">Compact List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
@@ -77,5 +65,21 @@ class ListView
       }
     }
     return $listString;
+  }
+
+  
+  private function userWantsVerboseList(): bool
+  {
+    return isset($_GET["verbose"]);
+  }
+
+  private function userWantsCompactList(): bool
+  {
+    return isset($_GET["compact"]);
+  }
+
+  private function userEntersSite(): bool
+  {
+    return empty($_GET);
   }
 }
