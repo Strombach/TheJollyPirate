@@ -15,13 +15,14 @@ class PageView
         </head>
         <body>
           <h1>The Jolly Pirate</h1>
-          <a href="?verbose">Verbose List</a>
           <a href="?compact">Compact List</a>
+          <br>
+          <a href="?verbose">Verbose List</a>
           <div class="container">
             <p>This is the beginning</p>
             ' . $v->response() . '
             <h2>List:</h2>
-            ' . $this->wantVerbose($v) . '
+            ' . $v->userWantsVerbose($v) . '
             <ol>
             </ol>
           </div>
@@ -31,14 +32,5 @@ class PageView
         </body>
       </html>
     ';
-  }
-
-  public function wantVerbose($v)
-  {
-    if (!isset($_GET["verbose"])) {
-      return $v->createCompactList();
-    } else {
-      return $v->createVerboseList();
-    }
   }
 }
