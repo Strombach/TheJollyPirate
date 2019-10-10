@@ -33,10 +33,11 @@ class ListView
   {
     $listString = '';
     for ($i = 0; $i < sizeof($this->members); $i++) {
-      var_dump($this->members[$i]);
       $name = $this->members[$i]->getName();
+      $id = $this->members[$i]->getID();
       $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
-      <a href=''></a></li>";
+      <a href='?user=" . $id . "'>Manage</a>
+      </li>";
     }
     return $listString;
   }
