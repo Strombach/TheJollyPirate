@@ -36,7 +36,7 @@ class ListView
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
       $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
-      <a href='?user=" . $id . "'>Manage</a>
+      <a href='?member=" . $id . "'>Manage</a>
       </li>";
     }
     return $listString;
@@ -47,8 +47,11 @@ class ListView
     $listString = '';
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
+      $id = $this->members[$i]->getID();
       $boatList = $this->createBoatList($this->members[$i]->getBoats());
-      $listString .= "<li>$name has " . $boatList . "</li>";
+      $listString .= "<li>$name has " . $boatList . "
+      <a href='?member=" . $id . "'>Manage</a>
+      </li>";
     }
     return $listString;
   }
