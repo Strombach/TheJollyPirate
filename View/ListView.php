@@ -19,6 +19,15 @@ class ListView
     ';
   }
 
+  public function userWantsVerbose()
+  {
+    if (!isset($_GET["verbose"])) {
+      return $this->createCompactList();
+    } else {
+      return $this->createVerboseList();
+    }
+  }
+
   public function createCompactList()
   {
     $listString = '';

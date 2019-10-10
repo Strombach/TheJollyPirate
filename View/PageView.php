@@ -21,7 +21,7 @@ class PageView
             <p>This is the beginning</p>
             ' . $v->response() . '
             <h2>List:</h2>
-            ' . $this->wantVerbose($v) . '
+            ' . $v->userWantsVerbose($v) . '
             <ol>
             </ol>
           </div>
@@ -31,14 +31,5 @@ class PageView
         </body>
       </html>
     ';
-  }
-
-  public function wantVerbose($v)
-  {
-    if (!isset($_GET["verbose"])) {
-      return $v->createCompactList();
-    } else {
-      return $v->createVerboseList();
-    }
   }
 }
