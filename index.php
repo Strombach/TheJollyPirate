@@ -17,11 +17,4 @@ $memberView = new \View\MemberView($memberStorage);
 
 $controller = new \Controller\Controller($listView, $pageView, $memberView);
 
-
-if (!isset($_GET["member"])) {
-  $controller->doRenderPageView();
-} else {
-  $controller->doRenderMemberView((int) $_GET["member"]);
-}
-
-//$pageView->render($listView);
+$controller->doRenderPageView();

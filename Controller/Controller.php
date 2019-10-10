@@ -18,11 +18,20 @@ class Controller
 
   public function doRenderPageView()
   {
+    if (!isset($_GET["member"])) {
+      $this->doRenderListView();
+    } else {
+      $this->doRenderMemberView((int) $_GET["member"]);
+    }
+  }
+
+  public function doRenderListView()
+  {
     $this->pv->render($this->lv);
   }
 
   public function doRenderMemberView($memberID)
   {
-    $this->pv->render($this->mv->response($memberToRender));
+    $this->pv->render($this->mv);
   }
 }

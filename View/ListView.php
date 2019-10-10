@@ -15,18 +15,26 @@ class ListView
 
   public function response()
   {
-    return '
-    <p>This is from the ListView class, awesome!</p>
-    ';
+    $ret = '';
+    
+    if ($this->userWantsCompactList()) {
+      $ret .= $this->createCompactList();
+    }
+    if ($this->userWantsVerboseList()) {
+      $ret .= $this->createVerboseList();
+    }
+
+    return $ret;
   }
 
-  public function userWantsVerbose()
+  public function userWantsVerboseList(): bool
   {
-    if (!isset($_GET["verbose"])) {
-      return $this->createCompactList();
-    } else {
-      return $this->createVerboseList();
-    }
+    return isset($_GET["verbose"]);
+  }
+
+  public function userWantsCompactList(): bool
+  {
+    return isset($_GET["compact"]);
   }
 
   public function createCompactList()

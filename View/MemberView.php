@@ -12,9 +12,13 @@ class MemberView
 
   public function response($memberID)
   {
-    $this->ms->findMemberByID($memberID);
-    return "
-    <p>" . $member->getName() . "</p>
-    ";
+    $ret = "";
+
+    $member = $this->ms->findMemberByID($memberID);
+
+    $name = $member->getName();
+    $ret = "<p>$name</p>";
+
+    return $ret;
   }
 }

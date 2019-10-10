@@ -19,12 +19,7 @@ class PageView
           <br>
           <a href="?verbose">Verbose List</a>
           <div class="container">
-            <p>This is the beginning</p>
-            ' . $v->response() . '
-            <h2>List:</h2>
-            ' . $v->userWantsVerbose($v) . '
-            <ol>
-            </ol>
+            ' . $this->viewToRender($v) . '
           </div>
           <footer>
             <h3>Created By</h3>
@@ -32,5 +27,13 @@ class PageView
         </body>
       </html>
     ';
+  }
+
+  private function viewToRender ($v) {
+    if ($v instanceof \View\ListView) {
+      return $v->response();
+    } else if ($v instanceof \View\MemberView) {
+      return $v->response((int) $_GET["member"]);
+    }
   }
 }
