@@ -6,11 +6,13 @@ class MemberStorage
 {
   private $members;
   private $jsonFile;
+  private $membersJSONArray;
 
   public function __construct($path)
   {
     $this->jsonFile = file_get_contents($path, true);
     $this->membersJSONArray = json_decode($this->jsonFile);
+    $this->members = $this->getMemberObjectArray();
   }
 
   public function getMemberObjectArray(): array
@@ -34,7 +36,7 @@ class MemberStorage
   public function findMemberByID(int $ID): \Model\Member
   {
     foreach ($this->members as $member) {
-      if ($member->id == $ID) {
+      if ($member->getID() == $ID) {
         return $member;
       }
     }

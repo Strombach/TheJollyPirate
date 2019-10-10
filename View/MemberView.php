@@ -2,15 +2,19 @@
 
 namespace View;
 
-class MemberView {
-
-  public function __construct () {
-
+class MemberView
+{
+  private $ms;
+  public function __construct(\Model\MemberStorage $mS)
+  {
+    $this->ms = $mS;
   }
 
-  public function response () {
-    return '
-    <p>This is from the MemberView class, awesome!</p>
-    ';
+  public function response($memberID)
+  {
+    $this->ms->findMemberByID($memberID);
+    return "
+    <p>" . $member->getName() . "</p>
+    ";
   }
 }
