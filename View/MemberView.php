@@ -15,7 +15,8 @@ class MemberView
 
   public function response($memberID): string
   {
-    $ret = '<a href="?compact">Back to list</a>';
+    $ret = '<a href="?compact">Back to list</a>
+    <a href="?memberedit=' . $memberID . '">Edit member</a>';
 
     $member = $this->ms->findMemberByID($memberID);
 
@@ -67,9 +68,9 @@ class MemberView
   {
     $ret = "";
     for ($i = 0; $i < sizeof($boats); $i++) {
-      $id = $boats[$i]->getBoatID();
-      $type = $boats[$i]->getBoatType();
-      $length = $boats[$i]->getBoatLength();
+      $id = $boats[$i]->getID();
+      $type = $boats[$i]->getType();
+      $length = $boats[$i]->getLength();
 
       $ret .= "
     <tr>

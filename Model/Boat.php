@@ -32,17 +32,17 @@ class Boat
 
 
 
-  public function getBoatType(): string
+  public function getType(): string
   {
     return $this->type;
   }
 
-  public function getBoatLength(): int
+  public function getLength(): int
   {
     return $this->lengthInCm;
   }
 
-  public function getBoatID(): string
+  public function getID(): string
   {
     return $this->id;
   }

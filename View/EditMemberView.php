@@ -5,24 +5,27 @@ namespace View;
 class EditMemberView
 {
   private $ms;
+
+
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
   }
 
-  private function userWantsToEdit()
+  public function getUpdatedMemberFromPost(): \Model\Member
   {
-    return isset($_GET["member"]);
+    return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
   }
 
-  private function userWantsToSave()
+  public function userWantsToUpdateInfo()
   {
-    return isset($_POST["saveedit"]);
+    return isset($_POST["name"]);
   }
 
-  public function response($memberID)
+  public function response($memberID): string
   {
-    $ret = '<a href="?compact">Back to list</a>';
+    $ret = "<form action='?member=$memberID' method='post'>
+    <input type='submit' value='Save'>";
 
     $member = $this->ms->findMemberByID($memberID);
 
@@ -31,32 +34,61 @@ class EditMemberView
     $pn = $member->getPersonalNumber();
     $boats = $member->getBoats();
 
-    $ret .= $this->editMemberInfo($name, $id, $pn, $boats);
+    $ret .= $this->createEditForm($name, $id, $pn, $boats);
+
+    $ret .= '</form>';
 
     return $ret;
   }
 
-  private function editMemberInfo($name, $id, $pn, $boats)
+  private function createEditForm($name, $id, $pn, $boats): string
   {
     $ret = "";
 
     $ret .= "
-    <form action='/?member=$id' method='post'>
-      <button type='submit' formmethod='post'>Submit using POST</button>
-    </form>
-    <p>Name: $name</p>
-    <p>ID: $id</p>
-    <p>Personal Number: $pn</p>
+    <p>Name: <input type='text' name='name' value='$name'></p>
+    <p>ID: <input readonly type='text' name='id' value='$id'></p>
+    <p>Personal Number: <input type='text' name='pn' value='$pn'></p>
     ";
 
-    if ($this->userWantsToEdit()) {
-      echo 'userWantsToEdit';
-    }
-
-    // TODO: Boats-table, loopa genom o grejer. Kanske göra en egen privat metod åt detta
+    $ret .= $this->createBoatTable($boats);
 
     return $ret;
   }
 
+  private function createBoatTable(array $boats): string
+  {
+    $ret = "
+    <h3>Boats</h3>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Length</th>
+      </tr>";
 
+    $ret .= $this->createBoatRows($boats);
+
+    $ret .= "
+      </table>";
+    return $ret;
+  }
+
+  private function createBoatRows($boats): string
+  {
+    $ret = "";
+    for ($i = 0; $i < sizeof($boats); $i++) {
+      $id = $boats[$i]->getID();
+      $type = $boats[$i]->getType();
+      $length = $boats[$i]->getLength();
+
+      $ret .= "
+    <tr>
+      <td>$id</td>
+      <td>$type</td>
+      <td>$length cm</td>
+    </tr>";
+    }
+    return $ret;
+  }
 }

@@ -4,34 +4,51 @@ namespace Controller;
 
 class Controller
 {
-
   private $lv;
   private $pv;
   private $mv;
 
-  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV)
+  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS)
   {
     $this->lv = $lV;
     $this->pv = $pV;
     $this->mv = $mV;
+    $this->emv = $eMV;
+    $this->ms = $mS;
   }
 
-  public function doRenderPageView()
+  public function doRenderPageView(): void
   {
-    if (!isset($_GET["member"])) {
+    if (isset($_GET["member"])) {
+      $this->doRenderMemberView();
+    } else if (isset($_GET["memberedit"])) {
+      $this->doRenderEditMemberView();
+    } else {
       $this->doRenderListView();
-    } else if (isset($_GET["member"])) {
-      $this->doRenderMemberView((int) $_GET["member"]);
+    }
+
+    if ($this->emv->userWantsToUpdateInfo()) {
+      $this->doUpdateMemberInfo();
     }
   }
 
-  public function doRenderListView()
+  private function doRenderListView(): void
   {
     $this->pv->render($this->lv);
   }
 
-  public function doRenderMemberView($memberID)
+  private function doRenderMemberView(): void
   {
     $this->pv->render($this->mv);
+  }
+
+  private function doRenderEditMemberView(): void
+  {
+    $this->pv->render($this->emv);
+  }
+
+  private function doUpdateMemberInfo():void {
+    $updatedMemberObject = $this->emv->getUpdatedMemberFromPost();
+    $this->ms->updateMemberInfo($updatedMemberObject);
   }
 }

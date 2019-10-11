@@ -3,6 +3,7 @@
 require_once('View/PageView.php');
 require_once('View/ListView.php');
 require_once('View/MemberView.php');
+require_once('View/EditMemberView.php');
 
 require_once('Model/Member.php');
 require_once('Model/MemberStorage.php');
@@ -17,7 +18,8 @@ $memberStorage = new \Model\MemberStorage('database.json');
 $pageView = new \View\PageView();
 $listView = new \View\ListView($memberStorage);
 $memberView = new \View\MemberView($memberStorage);
+$editMemberView = new \View\EditMemberView($memberStorage);
 
-$controller = new \Controller\Controller($listView, $pageView, $memberView);
+$controller = new \Controller\Controller($listView, $pageView, $memberView, $editMemberView, $memberStorage);
 
 $controller->doRenderPageView();
