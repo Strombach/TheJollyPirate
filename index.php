@@ -2,10 +2,13 @@
 
 require_once('View/PageView.php');
 require_once('View/ListView.php');
-require_once('Model/MemberStorage.php');
-require_once('Controller/Controller.php');
-require_once('Model/Member.php');
 require_once('View/MemberView.php');
+
+require_once('Model/Member.php');
+require_once('Model/MemberStorage.php');
+require_once('Model/Boat.php');
+
+require_once('Controller/Controller.php');
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');

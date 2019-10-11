@@ -57,7 +57,7 @@ class ListView
     $listString = '';
     for ($i = 0; $i < sizeof($boatArr); $i++) {
       $type = $boatArr[$i]->type;
-      $length = $boatArr[$i]->cm;
+      $length = $boatArr[$i]->lengthInCm;
       if ($i > 0) {
         $listString .= " And a " . $type . " and the length is: $length cm<br>";
       } else {

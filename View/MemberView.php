@@ -7,17 +7,13 @@ class MemberView
   private $ms;
 
 
-
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
   }
 
-  // private function userWantsInfo () {
-  //   return $_GET["info"];
-  // }
 
-  public function response($memberID)
+  public function response($memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>';
 
@@ -33,7 +29,8 @@ class MemberView
     return $ret;
   }
 
-  private function showMemberInfo($name, $id, $pn, $boats)
+
+  private function showMemberInfo($name, $id, $pn, $boats): string
   {
     $ret = "";
 
@@ -43,8 +40,44 @@ class MemberView
     <p>Personal Number: $pn</p>
     ";
 
-    // TODO: Boats-table, loopa genom o grejer. Kanske göra en egen privat metod åt detta
+    $ret .= $this->createBoatTable($boats);
 
+    return $ret;
+  }
+
+  private function createBoatTable(array $boats): string
+  {
+    $ret = "
+    <h3>Boats</h3>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Type</th>
+        <th>Length</th>
+      </tr>";
+
+    $ret .= $this->createBoatRows($boats);
+
+    $ret .= "
+      </table>";
+    return $ret;
+  }
+
+  private function createBoatRows($boats): string
+  {
+    $ret = "";
+    for ($i = 0; $i < sizeof($boats); $i++) {
+      $id = $boats[$i]->getBoatID();
+      $type = $boats[$i]->getBoatType();
+      $length = $boats[$i]->getBoatLength();
+
+      $ret .= "
+    <tr>
+      <td>$id</td>
+      <td>$type</td>
+      <td>$length cm</td>
+    </tr>";
+    }
     return $ret;
   }
 }

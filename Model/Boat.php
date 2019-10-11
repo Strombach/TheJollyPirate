@@ -10,13 +10,12 @@ class Boat
 
 
 
-  public function __construct(String $type, int $length)
+  public function __construct(string $id, string $type, int $lengthInCm)
   {
-    $this->id = abs(crc32(uniqid('', true)));
+    $this->id = $id;
     $this->updateType($type);
-    $this->updateLength($length);
+    $this->updateLength($lengthInCm);
   }
-
 
 
   public function updateLength(int $newLength): void
@@ -43,7 +42,7 @@ class Boat
     return $this->lengthInCm;
   }
 
-  public function getBoatId(): int
+  public function getBoatID(): string
   {
     return $this->id;
   }

@@ -27,10 +27,26 @@ class MemberStorage
       $ID = $this->membersJSONArray[$i]->id;
       $name = $this->membersJSONArray[$i]->name;
       $personalNumber = $this->membersJSONArray[$i]->pn;
-      $boats = $this->membersJSONArray[$i]->boats;
+      $boats = $this->createBoatObjects($this->membersJSONArray[$i]->boats);
+
       array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
     }
     return $memberObjectArray;
+  }
+
+  private function createBoatObjects($boats): array
+  {
+    $ret = array();
+
+    for ($i = 0; $i < sizeof($boats); $i++) {
+      $id = $boats[$i]->id;
+      $type = $boats[$i]->type;
+      $lengthInCm = $boats[$i]->lengthInCm;
+
+      $boatObject = new \Model\Boat($id, $type, $lengthInCm);
+      array_push($ret, $boatObject);
+    }
+    return $ret;
   }
 
   public function addMember(\Model\Member $newMember): void
