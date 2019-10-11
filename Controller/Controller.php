@@ -8,21 +8,24 @@ class Controller
   private $pv;
   private $mv;
 
-  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS)
+  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
   {
     $this->lv = $lV;
     $this->pv = $pV;
     $this->mv = $mV;
     $this->emv = $eMV;
     $this->ms = $mS;
+    $this->ebv = $eBV;
   }
 
   public function doRenderPageView(): void
   {
     if (isset($_GET["member"])) {
       $this->doRenderMemberView();
-    } else if (isset($_GET["memberedit"])) {
+    } else if (isset($_GET["editmember"])) {
       $this->doRenderEditMemberView();
+    } else if (isset($_GET["editboat"])) {
+      $this->doRenderEditBoatView();
     } else {
       $this->doRenderListView();
     }
@@ -47,7 +50,13 @@ class Controller
     $this->pv->render($this->emv);
   }
 
-  private function doUpdateMemberInfo():void {
+  private function doRenderEditBoatView(): void
+  {
+    $this->pv->render($this->ebv);
+  }
+
+  private function doUpdateMemberInfo(): void
+  {
     $updatedMemberObject = $this->emv->getUpdatedMemberFromPost();
     $this->ms->updateMemberInfo($updatedMemberObject);
   }

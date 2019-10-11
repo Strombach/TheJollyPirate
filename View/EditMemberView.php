@@ -17,11 +17,6 @@ class EditMemberView
     return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
   }
 
-  // public function getUpdatedBoatsFromPost(): \Model\Member
-  // {
-  //   return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
-  // }
-
   public function userWantsToUpdateInfo()
   {
     return isset($_POST["name"]);
@@ -30,7 +25,7 @@ class EditMemberView
   public function response($memberID): string
   {
     $ret = "<form action='?member=$memberID' method='post'>
-    <input type='submit' value='Save member information'>";
+    <input type='submit' value='Save'>";
 
     $member = $this->ms->findMemberByID($memberID);
 
@@ -41,6 +36,7 @@ class EditMemberView
 
     $ret .= $this->createEditForm($name, $id, $pn, $boats);
 
+    $ret .= '</form>';
 
     return $ret;
   }
@@ -55,14 +51,12 @@ class EditMemberView
     <p>Personal Number: <input type='text' name='pn' value='$pn'></p>
     ";
 
-    $ret .= '</form>';
-
-    $ret .= $this->createBoatTable($boats, $id);
+    $ret .= $this->createBoatTable($boats);
 
     return $ret;
   }
 
-  private function createBoatTable(array $boats, int $memberID): string
+  private function createBoatTable(array $boats): string
   {
     $ret = "
     <h3>Boats</h3>
@@ -73,14 +67,14 @@ class EditMemberView
         <th>Length</th>
       </tr>";
 
-    $ret .= $this->createEditBoatTableRows($boats, $memberID);
+    $ret .= $this->createEditBoatTableRows($boats);
 
     $ret .= "
       </table>";
     return $ret;
   }
 
-  private function createEditBoatTableRows($boats, int $memberID): string
+  private function createEditBoatTableRows($boats): string
   {
     $ret = "";
     for ($i = 0; $i < sizeof($boats); $i++) {
@@ -89,16 +83,12 @@ class EditMemberView
       $length = $boats[$i]->getLength();
 
       $ret .= "
-     
     <tr>
-      <form action='?memberedit=$memberID' method='post'>
-      <td><input readonly type='text' name='boatID' value='$id'></td>
-      <td><input type='text' name='boatType' value='$type'></td>
-      <td><input type='text' name='boatLength' value='$length'> cm</td>
-      <td><input type='submit' value='Save this boat'></td>
-      </form>
-    </tr>
-    ";
+      <td>$id</td>
+      <td>$type</td>
+      <td>$length cm</td>
+      <td><a href='?editboat=" . $id . "'>Edit boat</a></td>
+    </tr>";
     }
     return $ret;
   }

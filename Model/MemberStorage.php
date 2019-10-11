@@ -77,12 +77,8 @@ class MemberStorage
       array_push($membersJSON, $phpObj);
     }
 
-    var_dump($membersJSON);
-    echo '<br><br><br>';
-
     $membersJSON = json_encode($membersJSON);
 
-    var_dump($membersJSON);
     file_put_contents($this->path, $membersJSON);
   }
 
@@ -111,6 +107,18 @@ class MemberStorage
     foreach ($this->members as $member) {
       if ($member->getID() == $ID) {
         return $member;
+      }
+    }
+  }
+
+  public function findBoatByID(int $memberID, string $boatID): \Model\Boat
+  {
+    $boatOwner = $this->findMemberByID($memberID);
+    $boats = $boatOwner->getBoats();
+
+    foreach ($boats as $boat) {
+      if ($boat->getID() == $boatID) {
+        return $boat;
       }
     }
   }

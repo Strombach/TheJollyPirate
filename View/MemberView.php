@@ -16,7 +16,7 @@ class MemberView
   public function response($memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>
-    <a href="?memberedit=' . $memberID . '">Edit member</a>';
+    <a href="?editmember=' . $memberID . '">Edit member</a>';
 
     $member = $this->ms->findMemberByID($memberID);
 

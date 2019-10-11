@@ -33,7 +33,9 @@ class PageView
     } else if ($v instanceof \View\MemberView) {
       return $v->response((int) $_GET["member"]);
     } else if ($v instanceof \View\EditMemberView) {
-      return $v->response((int) $_GET["memberedit"]);
+      return $v->response((int) $_GET["editmember"]);
+    } else if ($v instanceof \View\EditBoatView) {
+      return $v->response($_GET["editboat"]);
     }
   }
 }
