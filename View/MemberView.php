@@ -57,14 +57,14 @@ class MemberView
         <th>Length</th>
       </tr>";
 
-    $ret .= $this->createBoatRows($boats);
+    $ret .= $this->createBoatTableRows($boats);
 
     $ret .= "
       </table>";
     return $ret;
   }
 
-  private function createBoatRows($boats): string
+  private function createBoatTableRows($boats): string
   {
     $ret = "";
     for ($i = 0; $i < sizeof($boats); $i++) {
