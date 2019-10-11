@@ -30,8 +30,12 @@ class Controller
       $this->doRenderListView();
     }
 
-    if ($this->emv->userWantsToUpdateInfo()) {
+    if ($this->emv->userWantsToUpdateMemberInfo()) {
       $this->doUpdateMemberInfo();
+    }
+
+    if ($this->ebv->userWantsToUpdateBoatInfo()) {
+      $this->doUpdateBoatInfo();
     }
   }
 
@@ -59,5 +63,11 @@ class Controller
   {
     $updatedMemberObject = $this->emv->getUpdatedMemberFromPost();
     $this->ms->updateMemberInfo($updatedMemberObject);
+  }
+
+  private function doUpdateBoatInfo(): void
+  {
+    $updatedBoatObject = $this->ebv->getUpdatedBoatFromPost();
+    $this->ms->updateBoatInfo($updatedBoatObject);
   }
 }

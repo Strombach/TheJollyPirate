@@ -65,16 +65,16 @@ class Member
     array_push($this->boats, $newBoat);
   }
 
-  public function findBoatByID(int $ID): \Model\Boat
+  public function findBoatByID(string $ID): \Model\Boat
   {
     foreach ($this->boats as $boat) {
-      if ($boat->id == $ID) {
+      if ($boat->getID() == $ID) {
         return $boat;
       }
     }
   }
 
-  public function removeBoat(int $ID): void
+  public function removeBoat(string $ID): void
   {
     $boatToRemove = $this->findBoatByID($ID);
     array_splice($this->boats, $boatToRemove);

@@ -93,11 +93,25 @@ class MemberStorage
     $name = $updatedMemberInfo->getName();
     $personalNumber = $updatedMemberInfo->getPersonalNumber();
 
-    // $boats
     $member = $this->findMemberByID($id);
 
     $member->setName($name);
     $member->setPersonalNumber($personalNumber);
+
+    $this->saveToDatabase();
+  }
+
+  public function updateBoatInfo(\Model\Boat $updatedBoatInfo): void
+  {
+    $id = $updatedBoatInfo->getID();
+    $type = $updatedBoatInfo->getType();
+    $length = $updatedBoatInfo->getLength();
+
+    $memberID = $memberID = (int) substr($id, 0, 1);
+    $boat = $this->findBoatByID($memberID, $id);
+
+    $boat->updateType($type);
+    $boat->updateLength($length);
 
     $this->saveToDatabase();
   }
@@ -114,13 +128,10 @@ class MemberStorage
   public function findBoatByID(int $memberID, string $boatID): \Model\Boat
   {
     $boatOwner = $this->findMemberByID($memberID);
-    $boats = $boatOwner->getBoats();
 
-    foreach ($boats as $boat) {
-      if ($boat->getID() == $boatID) {
-        return $boat;
-      }
-    }
+    $boat = $boatOwner->findBoatByID($boatID);
+
+    return $boat;
   }
 
   public function removeMember(int $ID): void
