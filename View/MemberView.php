@@ -5,6 +5,9 @@ namespace View;
 class MemberView
 {
   private $ms;
+
+
+
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
@@ -13,16 +16,6 @@ class MemberView
   // private function userWantsInfo () {
   //   return $_GET["info"];
   // }
-
-  private function userWantsToEdit()
-  {
-    return isset($_GET["member"]);
-  }
-
-  private function userWantsToSave()
-  {
-    return isset($_POST["saveedit"]);
-  }
 
   public function response($memberID)
   {
@@ -45,26 +38,12 @@ class MemberView
     $ret = "";
 
     $ret .= "
-    <form action='/?member=$id' method='post'>
-      <button type='submit' formmethod='post'>Submit using POST</button>
-    </form>
     <p>Name: $name</p>
     <p>ID: $id</p>
     <p>Personal Number: $pn</p>
     ";
 
-    if ($this->userWantsToEdit()) {
-      echo 'userWantsToEdit';
-    }
-
     // TODO: Boats-table, loopa genom o grejer. Kanske göra en egen privat metod åt detta
-
-    return $ret;
-  }
-
-  private function editMemberInfo($name, $id, $pn, $boats)
-  {
-    $ret = '';
 
     return $ret;
   }

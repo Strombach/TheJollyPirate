@@ -10,6 +10,11 @@ class EditMemberView
     $this->ms = $mS;
   }
 
+  private function userWantsToEdit()
+  {
+    return isset($_GET["member"]);
+  }
+
   private function userWantsToSave()
   {
     return isset($_POST["saveedit"]);

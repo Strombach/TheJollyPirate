@@ -8,7 +8,7 @@ class ListView
 
   public function __construct($ms)
   {
-    $this->members = $ms->getMemberObjectArray();
+    $this->members = $ms->getMembers();
   }
 
   public function response()

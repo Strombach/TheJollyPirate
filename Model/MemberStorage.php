@@ -15,7 +15,12 @@ class MemberStorage
     $this->members = $this->getMemberObjectArray();
   }
 
-  public function getMemberObjectArray(): array
+  public function getMembers(): array
+  {
+    return $this->members;
+  }
+
+  private function getMemberObjectArray(): array
   {
     $memberObjectArray = array();
     for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
