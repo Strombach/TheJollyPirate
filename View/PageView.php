@@ -26,7 +26,8 @@ class PageView
     ';
   }
 
-  private function viewToRender ($v) {
+  private function viewToRender($v)
+  {
     if ($v instanceof \View\ListView) {
       return $v->response();
     } else if ($v instanceof \View\MemberView) {
