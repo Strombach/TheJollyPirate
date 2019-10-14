@@ -22,6 +22,11 @@ class EditMemberView
     return isset($_POST["name"]);
   }
 
+  public function userWantsToDeleteBoat(): bool
+  { 
+    return isset($_GET["deleteboat"]);
+  }
+
   public function response($memberID): string
   {
     $ret = "<form action='?member=$memberID' method='post'>
@@ -87,7 +92,8 @@ class EditMemberView
       <td>$id</td>
       <td>$type</td>
       <td>$length cm</td>
-      <td><a href='?editboat=" . $id . "'>Edit boat</a></td>
+      <td><a href='?editboat=" . $id . "'>Edit</a></td>
+      <td><a href='?deleteboat=" . $id . "'>Delete</a></td>
     </tr>";
     }
     return $ret;

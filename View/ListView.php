@@ -2,13 +2,17 @@
 
 namespace View;
 
+use stdClass;
+
 class ListView
 {
   private $members;
+  private $memberStorage;
 
-  public function __construct($ms)
+  public function __construct($memberStorage)
   {
-    $this->members = $ms->getMembers();
+    $this->members = $memberStorage->getMembers();
+    $this->memberStorage = $memberStorage;
   }
 
   public function response()
@@ -35,6 +39,7 @@ class ListView
       $id = $this->members[$i]->getID();
       $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
       <a href='?member=" . $id . "'>Manage</a>
+      <a href='?delete=" . $id . "'>Delete</a>
       </li>";
     }
     return $listString;
@@ -71,6 +76,19 @@ class ListView
     return $ret;
   }
 
+  public function getNewMemberInfoFromPost()
+  {
+    $name = $_POST["fullname"];
+    $ssn = $_POST["ssn"];
+
+    $memberInfo = new stdClass();
+
+    $memberInfo->name = $name;
+    $memberInfo->ssn = $ssn;
+
+    return $memberInfo;
+  }
+
   private function createBoatList($boatArr)
   {
     $listString = '';
@@ -86,6 +104,16 @@ class ListView
     return $listString;
   }
 
+
+  public function userWantsToAddNewMember(): bool
+  {
+    return isset($_POST["fullname"]);
+  }
+
+  public function userWantsToDeleteMember(): bool
+  {
+    return isset($_GET["delete"]);
+  }
 
   private function userWantsVerboseList(): bool
   {

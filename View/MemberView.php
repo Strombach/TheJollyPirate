@@ -27,9 +27,45 @@ class MemberView
 
     $ret .= $this->showMemberInfo($name, $id, $pn, $boats);
 
+    $ret .= $this->createAddBoatForm($id);
+
     return $ret;
   }
 
+  public function userWantsToAddBoat(): bool
+  { 
+    return isset($_POST["type"]);
+  }
+
+  public function getNewBoatInfoFromPost()
+  {
+    $type = $_POST["type"];
+    $length = $_POST["length"];
+
+    $boatInfo = new \stdClass();
+
+    $boatInfo->type = $type;
+    $boatInfo->length = $length;
+
+    return $boatInfo;
+  }
+
+  private function createAddBoatForm($id): string
+  {
+    $ret = "<form action='?member=$id' method='post'>
+
+    <label for='type'>Boat type:</label>
+    <input type='text' name='type' placeholder='Ex: Sailboat'>
+    <label for='length'>Length in Cm:</label>
+    <input type='text' name='length' placeholder='XXXX'>
+
+    <input type='submit' value='Add new boat'>
+
+    </form>
+    ";
+
+    return $ret;
+  }
 
   private function showMemberInfo($name, $id, $pn, $boats): string
   {

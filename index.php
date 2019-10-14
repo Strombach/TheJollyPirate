@@ -15,17 +15,19 @@ require_once('Controller/Controller.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-$views = new stdClass();
+try {
+    $views = new stdClass();
 
-$views->memberStorage = new \Model\MemberStorage('database.json');
-$views->pageView = new \View\PageView();
-$views->listView = new \View\ListView($views->memberStorage);
-$views->memberView = new \View\MemberView($views->memberStorage);
-$views->editMemberView = new \View\EditMemberView($views->memberStorage);
-$views->editBoatView = new \View\EditBoatView($views->memberStorage);
+    $views->memberStorage = new \Model\MemberStorage('database.json');
+    $views->pageView = new \View\PageView();
+    $views->listView = new \View\ListView($views->memberStorage);
+    $views->memberView = new \View\MemberView($views->memberStorage);
+    $views->editMemberView = new \View\EditMemberView($views->memberStorage);
+    $views->editBoatView = new \View\EditBoatView($views->memberStorage);
 
-$controller = new \Controller\Controller($views);
+    $controller = new \Controller\Controller($views);
 
-// $controller = new \Controller\Controller($listView, $pageView, $memberView, $editMemberView, $memberStorage, $editBoatView);
-
-$controller->doRenderPageView();
+    $controller->doRenderPageView();
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
