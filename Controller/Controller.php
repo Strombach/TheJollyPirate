@@ -8,14 +8,15 @@ class Controller
   private $pv;
   private $mv;
 
-  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
+  // public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
+  public function __construct(object $views)
   {
-    $this->lv = $lV;
-    $this->pv = $pV;
-    $this->mv = $mV;
-    $this->emv = $eMV;
-    $this->ms = $mS;
-    $this->ebv = $eBV;
+    $this->memberStorage = $views->memberStorage;
+    $this->pageView = $views->pageView;
+    $this->listView = $views->listView;
+    $this->memberView = $views->memberView;
+    $this->editMemberView = $views->editMemberView;
+    $this->editBoatView =$views->editBoatView;
   }
 
   public function doRenderPageView(): void
@@ -30,44 +31,48 @@ class Controller
       $this->doRenderListView();
     }
 
-    if ($this->emv->userWantsToUpdateMemberInfo()) {
+    if ($this->editMemberView->userWantsToUpdateMemberInfo()) {
       $this->doUpdateMemberInfo();
     }
 
-    if ($this->ebv->userWantsToUpdateBoatInfo()) {
+    if ($this->editBoatView->userWantsToUpdateBoatInfo()) {
       $this->doUpdateBoatInfo();
     }
   }
 
   private function doRenderListView(): void
   {
-    $this->pv->render($this->lv);
+    $this->pageView->render($this->listView);
   }
 
   private function doRenderMemberView(): void
   {
-    $this->pv->render($this->mv);
+    $this->pageView->render($this->memberView);
   }
 
   private function doRenderEditMemberView(): void
   {
-    $this->pv->render($this->emv);
+    $this->pageView->render($this->editMemberView);
   }
 
   private function doRenderEditBoatView(): void
   {
-    $this->pv->render($this->ebv);
+    $this->pageView->render($this->editBoatView);
+  }
+
+  private function doAddNewMember (): void {
+    $newMember = $this->listView->getNewMemberFromPost();
   }
 
   private function doUpdateMemberInfo(): void
   {
-    $updatedMemberObject = $this->emv->getUpdatedMemberFromPost();
-    $this->ms->updateMemberInfo($updatedMemberObject);
+    $updatedMemberObject = $this->editMemberView->getUpdatedMemberFromPost();
+    $this->memberStorage->updateMemberInfo($updatedMemberObject);
   }
 
   private function doUpdateBoatInfo(): void
   {
-    $updatedBoatObject = $this->ebv->getUpdatedBoatFromPost();
-    $this->ms->updateBoatInfo($updatedBoatObject);
+    $updatedBoatObject = $this->editBoatView->getUpdatedBoatFromPost();
+    $this->memberStorage->updateBoatInfo($updatedBoatObject);
   }
 }

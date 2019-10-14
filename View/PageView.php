@@ -12,6 +12,7 @@ class PageView
         <head>
           <meta charset="utf-8">
           <title>The Jolly Pirate</title>
+          <link rel="stylesheet" type="text/css" href="../style.css">
         </head>
         <body>
           <h1>The Jolly Pirate</h1>

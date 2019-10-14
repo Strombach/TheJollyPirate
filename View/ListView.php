@@ -15,6 +15,8 @@ class ListView
   {
     $ret = '';
 
+    $ret .= $this->createAddMemberForm();
+
     if ($this->userWantsCompactList() || $this->userEntersSite()) {
       $ret .= $this->createCompactList();
     } else if ($this->userWantsVerboseList()) {
@@ -25,7 +27,7 @@ class ListView
   }
 
 
-  public function createCompactList()
+  private function createCompactList()
   {
     $listString = '<a href="?verbose">Verbose List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -38,7 +40,7 @@ class ListView
     return $listString;
   }
 
-  public function createVerboseList()
+  private function createVerboseList()
   {
     $listString = '<a href="?compact">Compact List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -50,6 +52,23 @@ class ListView
       </li>";
     }
     return $listString;
+  }
+
+  private function createAddMemberForm(): string
+  {
+    $ret = "<form action='?compact=' method='post'>
+
+    <label for='fullname'>Full Name:</label>
+    <input type='text' name='fullname' placeholder='John Doe'>
+    <label for='ssn'>Social Security Number:</label>
+    <input type='text' name='ssn' placeholder='YYMMDD-XXXX'>
+
+    <input type='submit' value='Add new member'>
+
+    </form>
+    ";
+
+    return $ret;
   }
 
   private function createBoatList($boatArr)
@@ -67,7 +86,7 @@ class ListView
     return $listString;
   }
 
-  
+
   private function userWantsVerboseList(): bool
   {
     return isset($_GET["verbose"]);

@@ -1,1 +1,1 @@
-[{"id":1,"name":"Dwayne Hansson","pn":"19720502-1234","boats":[{"type":"KRYSSARE MANNEN","lengthInCm":100000000,"id":"1_1"}]},{"id":2,"name":"Morgan Freeman","pn":"19370601-5678","boats":[{"type":"Sailboat","lengthInCm":500,"id":"2_1"},{"type":"Kayak","lengthInCm":200,"id":"2_2"}]}]
+[{"id":1,"name":"Dwayne Hansson","pn":"19720502-1234","boats":[{"type":"KRYSSARE MANNEN","lengthInCm":100000000,"id":"1_1"}]},{"id":2,"name":"Morgan Freeman","pn":"19370601-5678","boats":[{"type":"Sailboatd","lengthInCm":500,"id":"2_1"},{"type":"Kayak","lengthInCm":200,"id":"2_2"}]}]
