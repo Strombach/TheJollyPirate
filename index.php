@@ -15,13 +15,19 @@ require_once('Controller/Controller.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 
-$memberStorage = new \Model\MemberStorage('database.json');
-$pageView = new \View\PageView();
-$listView = new \View\ListView($memberStorage);
-$memberView = new \View\MemberView($memberStorage);
-$editMemberView = new \View\EditMemberView($memberStorage);
-$editBoatView = new \View\EditBoatView($memberStorage);
+try {
+    $views = new stdClass();
 
-$controller = new \Controller\Controller($listView, $pageView, $memberView, $editMemberView, $memberStorage, $editBoatView);
+    $views->memberStorage = new \Model\MemberStorage('database.json');
+    $views->pageView = new \View\PageView();
+    $views->listView = new \View\ListView($views->memberStorage);
+    $views->memberView = new \View\MemberView($views->memberStorage);
+    $views->editMemberView = new \View\EditMemberView($views->memberStorage);
+    $views->editBoatView = new \View\EditBoatView($views->memberStorage);
 
-$controller->doRenderPageView();
+    $controller = new \Controller\Controller($views);
+
+    $controller->doRenderPageView();
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}

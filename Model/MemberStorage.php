@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Exception;
+
 class MemberStorage
 {
   private $members;
@@ -20,6 +22,27 @@ class MemberStorage
   public function getMembers(): array
   {
     return $this->members;
+  }
+
+  public function getMemberIDs(): array
+  {
+    $members = $this->getMembers();
+
+    $memberIDs = array();
+    for ($i = 0; $i < sizeof($members); $i++) {
+      array_push($memberIDs, $members[$i]->getID());
+    }
+    return $memberIDs;
+  }
+
+  public function getFirstVacantMemberID($memberIDs): int
+  {
+    for ($i = 1; $i <= sizeof($memberIDs); $i++) {
+      if ($memberIDs[$i - 1] != $i) {
+        return $i;
+      }
+    }
+    return sizeof($memberIDs) + 1;
   }
 
   private function getMemberObjectArray(): array
@@ -51,7 +74,7 @@ class MemberStorage
     return $ret;
   }
 
-  private function saveToDatabase(): void
+  public function saveToDatabase(): void
   {
     $membersJSON = array();
 
@@ -85,6 +108,8 @@ class MemberStorage
   public function addMember(\Model\Member $newMember): void
   {
     array_push($this->members, $newMember);
+
+    $this->saveToDatabase();
   }
 
   public function updateMemberInfo(\Model\Member $updatedMemberInfo): void
@@ -123,6 +148,7 @@ class MemberStorage
         return $member;
       }
     }
+    throw new Exception("Member not found");
   }
 
   public function findBoatByID(int $memberID, string $boatID): \Model\Boat
@@ -134,9 +160,17 @@ class MemberStorage
     return $boat;
   }
 
-  public function removeMember(int $ID): void
+  public function removeMemberByID(int $ID): void
   {
     $memberToRemove = $this->findMemberByID($ID);
-    array_splice($this->members, $memberToRemove);
+
+    $key = array_search($memberToRemove, $this->members);
+    $removedMember = array_splice($this->members, $key, 1);
+
+    if ($removedMember == null) {
+      throw new Exception("Failed to remove");
+    }
+
+    $this->saveToDatabase();
   }
 }

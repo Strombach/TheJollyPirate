@@ -15,12 +15,12 @@ class EditBoatView
 
   public function getUpdatedBoatFromPost(): \Model\Boat
   {
-    return new \Model\Boat($_POST["id"], $_POST["type"], $_POST["length"]);
+    return new \Model\Boat($_POST["id"], $_POST["updatedType"], $_POST["updatedLength"]);
   }
 
   public function userWantsToUpdateBoatInfo()
   {
-    return isset($_POST["length"]);
+    return isset($_POST["updatedLength"]);
   }
 
 
@@ -50,8 +50,8 @@ class EditBoatView
 
     $ret .= "
     <p>ID: <input readonly type='text' name='id' value='$id'></p>
-    <p>Type: <input type='text' name='type' value='$type'></p>
-    <p>Length: <input type='text' name='length' value='$length'>cm</p>
+    <p>Type: <input type='text' name='updatedType' value='$type'></p>
+    <p>Length: <input type='text' name='updatedLength' value='$length'>cm</p>
     ";
 
     return $ret;

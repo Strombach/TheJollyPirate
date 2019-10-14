@@ -2,20 +2,23 @@
 
 namespace Controller;
 
+use Model\MemberStorage;
+
 class Controller
 {
   private $lv;
   private $pv;
   private $mv;
 
-  public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
+  // public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
+  public function __construct(object $views)
   {
-    $this->lv = $lV;
-    $this->pv = $pV;
-    $this->mv = $mV;
-    $this->emv = $eMV;
-    $this->ms = $mS;
-    $this->ebv = $eBV;
+    $this->memberStorage = $views->memberStorage;
+    $this->pageView = $views->pageView;
+    $this->listView = $views->listView;
+    $this->memberView = $views->memberView;
+    $this->editMemberView = $views->editMemberView;
+    $this->editBoatView = $views->editBoatView;
   }
 
   public function doRenderPageView(): void
@@ -30,44 +33,120 @@ class Controller
       $this->doRenderListView();
     }
 
-    if ($this->emv->userWantsToUpdateMemberInfo()) {
+    if ($this->editMemberView->userWantsToUpdateMemberInfo()) {
       $this->doUpdateMemberInfo();
     }
 
-    if ($this->ebv->userWantsToUpdateBoatInfo()) {
+    if ($this->editBoatView->userWantsToUpdateBoatInfo()) {
       $this->doUpdateBoatInfo();
+    }
+
+    if ($this->listView->userWantsToAddNewMember()) {
+      $this->doAddNewMember();
+    }
+    if ($this->listView->userWantsToDeleteMember()) {
+      $this->doDeleteMember();
+    }
+
+    if ($this->memberView->userWantsToAddBoat()) {
+      $this->doAddBoat();
+    }
+    if ($this->editMemberView->userWantsToDeleteBoat()) {
+      $this->doDeleteBoat();
     }
   }
 
   private function doRenderListView(): void
   {
-    $this->pv->render($this->lv);
+    $this->pageView->render($this->listView);
   }
 
   private function doRenderMemberView(): void
   {
-    $this->pv->render($this->mv);
+    $this->pageView->render($this->memberView);
   }
 
   private function doRenderEditMemberView(): void
   {
-    $this->pv->render($this->emv);
+    $this->pageView->render($this->editMemberView);
   }
 
   private function doRenderEditBoatView(): void
   {
-    $this->pv->render($this->ebv);
+    $this->pageView->render($this->editBoatView);
+  }
+
+  private function doAddNewMember(): void
+  {
+    $newMemberInfo = $this->listView->getNewMemberInfoFromPost();
+
+    $memberIDs = $this->memberStorage->getMemberIDs();
+
+    $IDToUse = $this->memberStorage->getFirstVacantMemberID($memberIDs);
+
+    $newMember = new \Model\Member($IDToUse, $newMemberInfo->name, $newMemberInfo->ssn, array());
+
+    $this->memberStorage->addMember($newMember);
+
+    header("Location: /");
+  }
+
+  private function doDeleteMember(): void
+  {
+    $memberToDeleteID = $_GET["delete"];
+    $this->memberStorage->removeMemberByID($memberToDeleteID);
+
+    header("Location: /");
+  }
+
+  private function doAddBoat(): void
+  {
+    $memberToAddBoatTo = $this->memberStorage->findMemberByID($_GET["member"]);
+    
+    $newBoatInfo = $this->memberView->getNewBoatInfoFromPost();
+
+    $boatIDs = $memberToAddBoatTo->getBoatIDs();
+
+    $IDToUse = $memberToAddBoatTo->getFirstVacantBoatID($boatIDs);
+
+    $newBoat = new \Model\Boat($IDToUse, $newBoatInfo->type, $newBoatInfo->length);
+
+    $memberToAddBoatTo->addBoat($newBoat);
+
+    $this->memberStorage->saveToDatabase();
+
+    $ID = $_GET["member"];
+    header("Location: /?member=$ID");
+  }
+
+  private function doDeleteBoat(): void
+  {
+    $memberID = substr($_GET["deleteboat"], 0, 1);
+    $memberToDeleteBoatFrom = $this->memberStorage->findMemberByID($memberID);
+    
+    $boatToDeleteID = $_GET["deleteboat"];
+    $memberToDeleteBoatFrom->removeBoatByID($boatToDeleteID);
+
+    $this->memberStorage->saveToDatabase();
+
+    header("Location: /?member=$memberID");
   }
 
   private function doUpdateMemberInfo(): void
   {
-    $updatedMemberObject = $this->emv->getUpdatedMemberFromPost();
-    $this->ms->updateMemberInfo($updatedMemberObject);
+    $updatedMemberObject = $this->editMemberView->getUpdatedMemberFromPost();
+    $this->memberStorage->updateMemberInfo($updatedMemberObject);
+
+    $ID = $updatedMemberObject->getID();
+    header("Location: /?member=$ID");
   }
 
   private function doUpdateBoatInfo(): void
   {
-    $updatedBoatObject = $this->ebv->getUpdatedBoatFromPost();
-    $this->ms->updateBoatInfo($updatedBoatObject);
+    $updatedBoatObject = $this->editBoatView->getUpdatedBoatFromPost();
+    $this->memberStorage->updateBoatInfo($updatedBoatObject);
+
+    $ID = $updatedBoatObject->getID();
+    header("Location: /?member=$ID");
   }
 }

@@ -2,18 +2,24 @@
 
 namespace View;
 
+use stdClass;
+
 class ListView
 {
   private $members;
+  private $memberStorage;
 
-  public function __construct($ms)
+  public function __construct($memberStorage)
   {
-    $this->members = $ms->getMembers();
+    $this->members = $memberStorage->getMembers();
+    $this->memberStorage = $memberStorage;
   }
 
   public function response()
   {
     $ret = '';
+
+    $ret .= $this->createAddMemberForm();
 
     if ($this->userWantsCompactList() || $this->userEntersSite()) {
       $ret .= $this->createCompactList();
@@ -25,7 +31,7 @@ class ListView
   }
 
 
-  public function createCompactList()
+  private function createCompactList()
   {
     $listString = '<a href="?verbose">Verbose List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -33,12 +39,13 @@ class ListView
       $id = $this->members[$i]->getID();
       $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
       <a href='?member=" . $id . "'>Manage</a>
+      <a href='?delete=" . $id . "'>Delete</a>
       </li>";
     }
     return $listString;
   }
 
-  public function createVerboseList()
+  private function createVerboseList()
   {
     $listString = '<a href="?compact">Compact List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -50,6 +57,36 @@ class ListView
       </li>";
     }
     return $listString;
+  }
+
+  private function createAddMemberForm(): string
+  {
+    $ret = "<form action='?compact=' method='post'>
+
+    <label for='fullname'>Full Name:</label>
+    <input type='text' name='fullname' placeholder='John Doe'>
+    <label for='ssn'>Social Security Number:</label>
+    <input type='text' name='ssn' placeholder='YYMMDD-XXXX'>
+
+    <input type='submit' value='Add new member'>
+
+    </form>
+    ";
+
+    return $ret;
+  }
+
+  public function getNewMemberInfoFromPost()
+  {
+    $name = $_POST["fullname"];
+    $ssn = $_POST["ssn"];
+
+    $memberInfo = new stdClass();
+
+    $memberInfo->name = $name;
+    $memberInfo->ssn = $ssn;
+
+    return $memberInfo;
   }
 
   private function createBoatList($boatArr)
@@ -67,7 +104,17 @@ class ListView
     return $listString;
   }
 
-  
+
+  public function userWantsToAddNewMember(): bool
+  {
+    return isset($_POST["fullname"]);
+  }
+
+  public function userWantsToDeleteMember(): bool
+  {
+    return isset($_GET["delete"]);
+  }
+
   private function userWantsVerboseList(): bool
   {
     return isset($_GET["verbose"]);
