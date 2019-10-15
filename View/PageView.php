@@ -5,7 +5,7 @@ namespace View;
 class PageView
 {
 
-  public function render($view)
+  public function render($view): void
   {
     echo '<!DOCTYPE html
       <html>
@@ -29,7 +29,7 @@ class PageView
   }
 
 
-  private function viewToRender($view)
+  private function viewToRender($view): string
   {
     if ($view instanceof \View\ListView) {
       return $view->response();

@@ -18,7 +18,7 @@ class MemberView
     return isset($_POST["type"]);
   }
 
-  public function getNewBoatInfoFromPost()
+  public function getNewBoatInfoFromPost(): object
   {
     $type = $_POST["type"];
     $length = (int) $_POST["length"];
@@ -31,7 +31,7 @@ class MemberView
     return $boatInfo;
   }
 
-  public function response($memberID): string
+  public function response(int $memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>
     <a href="?editmember=' . $memberID . '">Edit member</a>';
@@ -51,7 +51,7 @@ class MemberView
   }
 
 
-  private function createAddBoatForm($id): string
+  private function createAddBoatForm(int $id): string
   {
     $ret = "<form action='?member=$id' method='post'>
 
@@ -75,7 +75,7 @@ class MemberView
     return $ret;
   }
 
-  private function showMemberInfo($name, $id, $pn, array $boats): string
+  private function showMemberInfo(string $name, int $id, int $pn, array $boats): string
   {
     $ret = "";
 
