@@ -5,7 +5,7 @@ namespace View;
 class PageView
 {
 
-  public function render($v)
+  public function render($view)
   {
     echo '<!DOCTYPE html
       <html>
@@ -17,7 +17,7 @@ class PageView
         <body>
           <h1>The Jolly Pirate</h1>
           <div class="container">
-            ' . $this->viewToRender($v) . '
+            ' . $this->viewToRender($view) . '
           </div>
           <footer>
             <h3>Created By</h3>
@@ -28,16 +28,17 @@ class PageView
     ';
   }
 
-  private function viewToRender($v)
+
+  private function viewToRender($view)
   {
-    if ($v instanceof \View\ListView) {
-      return $v->response();
-    } else if ($v instanceof \View\MemberView) {
-      return $v->response((int) $_GET["member"]);
-    } else if ($v instanceof \View\EditMemberView) {
-      return $v->response((int) $_GET["editmember"]);
-    } else if ($v instanceof \View\EditBoatView) {
-      return $v->response($_GET["editboat"]);
+    if ($view instanceof \View\ListView) {
+      return $view->response();
+    } else if ($view instanceof \View\MemberView) {
+      return $view->response((int) $_GET["member"]);
+    } else if ($view instanceof \View\EditMemberView) {
+      return $view->response((int) $_GET["editmember"]);
+    } else if ($view instanceof \View\EditBoatView) {
+      return $view->response($_GET["editboat"]);
     }
   }
 }

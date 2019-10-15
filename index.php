@@ -29,5 +29,5 @@ try {
 
     $controller->doRenderPageView();
 } catch (Exception $e) {
-    echo 'Error: ',  $e->getMessage(), "\n";
+    echo '<h3>Error: ',  $e->getMessage(), "\n</h3>";
 }

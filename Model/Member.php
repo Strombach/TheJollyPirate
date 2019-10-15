@@ -2,6 +2,8 @@
 
 namespace Model;
 
+use Exception;
+
 class Member
 {
   private $ID;
@@ -9,28 +11,37 @@ class Member
   private $personalNumber;
   private $boats;
 
+  // Arguments are NOT strictly typed because the setter handles errors.
   public function __construct($ID, $name, $personalNumber, $boats)
   {
-    $this->ID = $ID;
-    $this->name = $name;
-    $this->personalNumber = $personalNumber;
+    $this->setID($ID);
+    $this->setName($name);
+    $this->setPersonalNumber((int)$personalNumber);
     $this->boats = $boats;
   }
 
 
-  public function setID(int $ID): void
+  public function setID($ID): void
   {
     $this->ID = $ID;
   }
 
-  public function setName(string $name): void
+  public function setName($name): void
   {
-    $this->name = $name;
+    if (strlen($name) >= 2) {
+      $this->name = $name;
+    } else {
+      throw new Exception('Name must be at least 2 characters.');
+    }
   }
 
-  public function setPersonalNumber(string $personalNumber): void
+  public function setPersonalNumber($personalNumber): void
   {
-    $this->personalNumber = $personalNumber;
+    if (is_int($personalNumber) && strlen($personalNumber) == 10) {
+      $this->personalNumber = $personalNumber;
+    } else {
+      throw new Exception('Personal number must contain only numbers and be formatted as YYMMDDXXXX.');
+    }
   }
 
 
@@ -45,7 +56,7 @@ class Member
     return $this->name;
   }
 
-  public function getPersonalNumber(): string
+  public function getPersonalNumber(): int
   {
     return $this->personalNumber;
   }
@@ -95,12 +106,6 @@ class Member
       }
     }
   }
-
-  // public function removeBoatByID(string $ID): void
-  // {
-  //   $boatToRemove = $this->findBoatByID($ID);
-  //   array_splice($this->boats, $boatToRemove);
-  // }
 
   public function removeBoatByID(string $ID): void
   {

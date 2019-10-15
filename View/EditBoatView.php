@@ -15,14 +15,17 @@ class EditBoatView
 
   public function getUpdatedBoatFromPost(): \Model\Boat
   {
-    return new \Model\Boat($_POST["id"], $_POST["updatedType"], $_POST["updatedLength"]);
+    $id = $_POST["id"];
+    $type = $_POST["updatedType"];
+    $length = (int)$_POST["updatedLength"];
+
+    return new \Model\Boat($id, $type, $length);
   }
 
   public function userWantsToUpdateBoatInfo()
   {
     return isset($_POST["updatedLength"]);
   }
-
 
   public function response($boatID): string
   {
@@ -50,7 +53,14 @@ class EditBoatView
 
     $ret .= "
     <p>ID: <input readonly type='text' name='id' value='$id'></p>
-    <p>Type: <input type='text' name='updatedType' value='$type'></p>
+    <p>Type:</p>
+    <select type='dropdown' name='updatedType'>
+      <option name='updatedType' value='Sailboat'>Sailboat</option>
+      <option name='updatedType' value='Motorsailer'>Motorsailer</option>
+      <option name='updatedType' value='Kayak/Canoe'>Kayak/Canoe</option>
+      <option name='updatedType' value='Other'>Other</option>
+    </select>
+    <br>
     <p>Length: <input type='text' name='updatedLength' value='$length'>cm</p>
     ";
 

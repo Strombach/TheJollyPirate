@@ -2,14 +2,13 @@
 
 namespace Model;
 
-use Exception;
-
 class MemberStorage
 {
   private $members;
   private $jsonFile;
   private $membersJSONArray;
   private $path;
+
 
   public function __construct($path)
   {
@@ -18,6 +17,7 @@ class MemberStorage
     $this->membersJSONArray = json_decode($this->jsonFile);
     $this->members = $this->getMemberObjectArray();
   }
+
 
   public function getMembers(): array
   {
@@ -43,35 +43,6 @@ class MemberStorage
       }
     }
     return sizeof($memberIDs) + 1;
-  }
-
-  private function getMemberObjectArray(): array
-  {
-    $memberObjectArray = array();
-    for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
-      $ID = $this->membersJSONArray[$i]->id;
-      $name = $this->membersJSONArray[$i]->name;
-      $personalNumber = $this->membersJSONArray[$i]->pn;
-      $boats = $this->createBoatObjects($this->membersJSONArray[$i]->boats);
-
-      array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
-    }
-    return $memberObjectArray;
-  }
-
-  private function createBoatObjects($boats): array
-  {
-    $ret = array();
-
-    for ($i = 0; $i < sizeof($boats); $i++) {
-      $id = $boats[$i]->id;
-      $type = $boats[$i]->type;
-      $lengthInCm = $boats[$i]->lengthInCm;
-
-      $boatObject = new \Model\Boat($id, $type, $lengthInCm);
-      array_push($ret, $boatObject);
-    }
-    return $ret;
   }
 
   public function saveToDatabase(): void
@@ -172,5 +143,34 @@ class MemberStorage
     }
 
     $this->saveToDatabase();
+  }
+
+  private function getMemberObjectArray(): array
+  {
+    $memberObjectArray = array();
+    for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
+      $ID = $this->membersJSONArray[$i]->id;
+      $name = $this->membersJSONArray[$i]->name;
+      $personalNumber = $this->membersJSONArray[$i]->pn;
+      $boats = $this->createBoatObjects($this->membersJSONArray[$i]->boats);
+
+      array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
+    }
+    return $memberObjectArray;
+  }
+
+  private function createBoatObjects($boats): array
+  {
+    $ret = array();
+
+    for ($i = 0; $i < sizeof($boats); $i++) {
+      $id = $boats[$i]->id;
+      $type = $boats[$i]->type;
+      $lengthInCm = $boats[$i]->lengthInCm;
+
+      $boatObject = new \Model\Boat($id, $type, $lengthInCm);
+      array_push($ret, $boatObject);
+    }
+    return $ret;
   }
 }

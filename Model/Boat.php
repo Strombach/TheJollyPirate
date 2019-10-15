@@ -10,8 +10,9 @@ class Boat
   private $lengthInCm;
   private $id;
 
+
   // Arguments are NOT strictly typed because the setter handles errors.
-  public function __construct(string $id, $type, $lengthInCm)
+  public function __construct($id, $type, $lengthInCm)
   {
     $this->id = $id;
     $this->updateType($type);
@@ -21,7 +22,7 @@ class Boat
 
   public function updateLength($newLength): void
   {
-    if ($newLength > 0 && is_int($newLength) === true) {
+    if ($newLength > 0 && is_int($newLength)) {
       $this->lengthInCm = $newLength;
     } else {
       throw new Exception('Boat length must be a number and greater than zero.');

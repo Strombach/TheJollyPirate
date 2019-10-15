@@ -23,7 +23,7 @@ class EditMemberView
   }
 
   public function userWantsToDeleteBoat(): bool
-  { 
+  {
     return isset($_GET["deleteboat"]);
   }
 
@@ -45,6 +45,7 @@ class EditMemberView
 
     return $ret;
   }
+
 
   private function createEditForm($name, $id, $pn, $boats): string
   {

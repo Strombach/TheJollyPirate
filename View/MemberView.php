@@ -40,7 +40,7 @@ class MemberView
   public function getNewBoatInfoFromPost()
   {
     $type = $_POST["type"];
-    $length = $_POST["length"];
+    $length = (int)$_POST["length"];
 
     $boatInfo = new \stdClass();
 
@@ -55,7 +55,14 @@ class MemberView
     $ret = "<form action='?member=$id' method='post'>
 
     <label for='type'>Boat type:</label>
-    <input type='text' name='type' placeholder='Ex: Sailboat'>
+    <br>
+    <select type='dropdown' name='type'>
+      <option name='type' value='Sailboat'>Sailboat</option>
+      <option name='type' value='Motorsailer'>Motorsailer</option>
+      <option name='type' value='Kayak/Canoe'>Kayak/Canoe</option>
+      <option name='type' value='Other'>Other</option>
+    </select>
+    <br>
     <label for='length'>Length in Cm:</label>
     <input type='text' name='length' placeholder='XXXX'>
 

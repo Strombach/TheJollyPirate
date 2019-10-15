@@ -2,8 +2,6 @@
 
 namespace Controller;
 
-use Model\MemberStorage;
-
 class Controller
 {
   private $memberStorage;
@@ -23,6 +21,7 @@ class Controller
     $this->editMemberView = $views->editMemberView;
     $this->editBoatView = $views->editBoatView;
   }
+
 
   public function doRenderPageView(): void
   {
@@ -81,7 +80,7 @@ class Controller
 
   private function doAddNewMember(): void
   {
-    $newMemberInfo = $this->listView->getNewMemberInfoFromPost();
+    $newMemberInfo = $this->listView->getNewMemberFromPost();
 
     $memberIDs = $this->memberStorage->getMemberIDs();
 
