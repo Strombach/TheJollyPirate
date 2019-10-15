@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use Exception;
-
 class Boat
 {
   private $type;
@@ -25,7 +23,7 @@ class Boat
     if ($newLength > 0 && is_int($newLength)) {
       $this->lengthInCm = $newLength;
     } else {
-      throw new Exception('Boat length must be a number and greater than zero.');
+      throw new \Exception('Boat length must be a number and greater than zero.');
     }
   }
 

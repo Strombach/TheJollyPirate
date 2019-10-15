@@ -2,8 +2,6 @@
 
 namespace View;
 
-use Exception;
-
 class ListView
 {
   private $members;
@@ -38,7 +36,7 @@ class ListView
     $ssn = $_POST["ssn"];
 
     if (empty($name) || empty($ssn)) {
-      throw new Exception("All fields must be filled.");
+      throw new \Exception("All fields must be filled.");
     }
 
     $memberInfo = new \stdClass();

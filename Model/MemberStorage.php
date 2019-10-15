@@ -119,7 +119,7 @@ class MemberStorage
         return $member;
       }
     }
-    throw new Exception("Member not found");
+    throw new \Exception("Member not found");
   }
 
   public function findBoatByID(int $memberID, string $boatID): \Model\Boat
@@ -139,7 +139,7 @@ class MemberStorage
     $removedMember = array_splice($this->members, $key, 1);
 
     if ($removedMember == null) {
-      throw new Exception("Failed to remove");
+      throw new \Exception("Failed to remove");
     }
 
     $this->saveToDatabase();

@@ -2,8 +2,6 @@
 
 namespace Model;
 
-use Exception;
-
 class Member
 {
   private $ID;
@@ -31,7 +29,7 @@ class Member
     if (strlen($name) >= 2) {
       $this->name = $name;
     } else {
-      throw new Exception('Name must be at least 2 characters.');
+      throw new \Exception('Name must be at least 2 characters.');
     }
   }
 
@@ -40,7 +38,7 @@ class Member
     if (is_int($personalNumber) && strlen($personalNumber) == 10) {
       $this->personalNumber = $personalNumber;
     } else {
-      throw new Exception('Personal number must contain only numbers and be formatted as YYMMDDXXXX.');
+      throw new \Exception('Personal number must contain only numbers and be formatted as YYMMDDXXXX.');
     }
   }
 
