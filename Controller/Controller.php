@@ -35,10 +35,10 @@ class Controller
       $this->doRenderListView();
     }
 
-    if ($this->editMemberView->userWantsToUpdateMemberInfo()) {
+    if ($this->editMemberView->userWantsToUpdateMember()) {
       $this->doUpdateMemberInfo();
     }
-    if ($this->editBoatView->userWantsToUpdateBoatInfo()) {
+    if ($this->editBoatView->userWantsToUpdateBoat()) {
       $this->doUpdateBoatInfo();
     }
 

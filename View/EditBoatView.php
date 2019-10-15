@@ -22,7 +22,7 @@ class EditBoatView
     return new \Model\Boat($id, $type, $length);
   }
 
-  public function userWantsToUpdateBoatInfo()
+  public function userWantsToUpdateBoat()
   {
     return isset($_POST["updatedLength"]);
   }

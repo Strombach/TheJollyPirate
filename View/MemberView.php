@@ -13,6 +13,24 @@ class MemberView
   }
 
 
+  public function userWantsToAddBoat(): bool
+  {
+    return isset($_POST["type"]);
+  }
+
+  public function getNewBoatInfoFromPost()
+  {
+    $type = $_POST["type"];
+    $length = (int) $_POST["length"];
+
+    $boatInfo = new \stdClass();
+
+    $boatInfo->type = $type;
+    $boatInfo->length = $length;
+
+    return $boatInfo;
+  }
+
   public function response($memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>
@@ -32,23 +50,6 @@ class MemberView
     return $ret;
   }
 
-  public function userWantsToAddBoat(): bool
-  { 
-    return isset($_POST["type"]);
-  }
-
-  public function getNewBoatInfoFromPost()
-  {
-    $type = $_POST["type"];
-    $length = (int)$_POST["length"];
-
-    $boatInfo = new \stdClass();
-
-    $boatInfo->type = $type;
-    $boatInfo->length = $length;
-
-    return $boatInfo;
-  }
 
   private function createAddBoatForm($id): string
   {
@@ -74,7 +75,7 @@ class MemberView
     return $ret;
   }
 
-  private function showMemberInfo($name, $id, $pn, $boats): string
+  private function showMemberInfo($name, $id, $pn, array $boats): string
   {
     $ret = "";
 
@@ -107,7 +108,7 @@ class MemberView
     return $ret;
   }
 
-  private function createBoatTableRows($boats): string
+  private function createBoatTableRows(array $boats): string
   {
     $ret = "";
     for ($i = 0; $i < sizeof($boats); $i++) {

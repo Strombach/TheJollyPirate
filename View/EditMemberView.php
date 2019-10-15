@@ -17,7 +17,7 @@ class EditMemberView
     return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
   }
 
-  public function userWantsToUpdateMemberInfo()
+  public function userWantsToUpdateMember()
   {
     return isset($_POST["name"]);
   }

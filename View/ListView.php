@@ -2,6 +2,8 @@
 
 namespace View;
 
+use Exception;
+
 class ListView
 {
   private $members;
@@ -45,6 +47,10 @@ class ListView
     $name = $_POST["fullname"];
     $ssn = $_POST["ssn"];
 
+    if (empty($name)|| empty($ssn)) {
+      throw new Exception("All fields must be filled.");
+    }
+
     $memberInfo = new \stdClass();
 
     $memberInfo->name = $name;
@@ -74,8 +80,10 @@ class ListView
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
+      $pn = $this->members[$i]->getPersonalNumber();
       $boatList = $this->createBoatList($this->members[$i]->getBoats());
-      $listString .= "<li>$name has " . $boatList . "
+
+      $listString .= "<li>$name ($pn), Member ID $id:<br> " . $boatList . "
       <a href='?member=" . $id . "'>Manage</a>
       </li>";
     }
@@ -105,11 +113,10 @@ class ListView
     for ($i = 0; $i < sizeof($boatArr); $i++) {
       $type = $boatArr[$i]->getType();
       $length = $boatArr[$i]->getLength();
-      if ($i > 0) {
-        $listString .= " And a " . $type . " and the length is: $length cm<br>";
-      } else {
-        $listString .= "a " . $type . " and the length is: $length cm.";
-      }
+      $id = $boatArr[$i]->getID();
+      $boatNumber = $i + 1;
+
+      $listString .= "Boat $boatNumber ID: $id Type: " . $type . " Length: $length cm.<br>";
     }
     return $listString;
   }
