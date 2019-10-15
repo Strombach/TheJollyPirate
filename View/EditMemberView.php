@@ -12,6 +12,7 @@ class EditMemberView
     $this->ms = $mS;
   }
 
+
   public function getUpdatedMemberFromPost(): \Model\Member
   {
     return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
@@ -27,7 +28,7 @@ class EditMemberView
     return isset($_GET["deleteboat"]);
   }
 
-  public function response($memberID): string
+  public function response(int $memberID): string
   {
     $ret = "<form action='?member=$memberID' method='post'>
     <input type='submit' value='Save'>";
@@ -47,7 +48,7 @@ class EditMemberView
   }
 
 
-  private function createEditForm($name, $id, $pn, $boats): string
+  private function createEditForm(string $name, int $id, int $pn, array $boats): string
   {
     $ret = "";
 
@@ -80,7 +81,7 @@ class EditMemberView
     return $ret;
   }
 
-  private function createEditBoatTableRows($boats): string
+  private function createEditBoatTableRows(array $boats): string
   {
     $ret = "";
     for ($i = 0; $i < sizeof($boats); $i++) {

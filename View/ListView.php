@@ -17,17 +17,7 @@ class ListView
   }
 
 
-  public function userWantsToAddNewMember(): bool
-  {
-    return isset($_POST["fullname"]);
-  }
-
-  public function userWantsToDeleteMember(): bool
-  {
-    return isset($_GET["delete"]);
-  }
-
-  public function response()
+  public function response(): string
   {
     $ret = '';
 
@@ -42,12 +32,12 @@ class ListView
     return $ret;
   }
 
-  public function getNewMemberFromPost()
+  public function getNewMemberFromPost(): object
   {
     $name = $_POST["fullname"];
     $ssn = $_POST["ssn"];
 
-    if (empty($name)|| empty($ssn)) {
+    if (empty($name) || empty($ssn)) {
       throw new Exception("All fields must be filled.");
     }
 
@@ -59,8 +49,33 @@ class ListView
     return $memberInfo;
   }
 
+  public function userWantsToAddNewMember(): bool
+  {
+    return isset($_POST["fullname"]);
+  }
 
-  private function createCompactList()
+  public function userWantsToDeleteMember(): bool
+  {
+    return isset($_GET["delete"]);
+  }
+
+
+  private function userWantsVerboseList(): bool
+  {
+    return isset($_GET["verbose"]);
+  }
+
+  private function userWantsCompactList(): bool
+  {
+    return isset($_GET["compact"]);
+  }
+
+  private function userEntersSite(): bool
+  {
+    return empty($_GET);
+  }
+
+  private function createCompactList(): string
   {
     $listString = '<a href="?verbose">Verbose List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -74,7 +89,7 @@ class ListView
     return $listString;
   }
 
-  private function createVerboseList()
+  private function createVerboseList(): string
   {
     $listString = '<a href="?compact">Compact List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
@@ -107,7 +122,7 @@ class ListView
     return $ret;
   }
 
-  private function createBoatList($boatArr)
+  private function createBoatList(array $boatArr): string
   {
     $listString = '';
     for ($i = 0; $i < sizeof($boatArr); $i++) {
@@ -119,20 +134,5 @@ class ListView
       $listString .= "Boat $boatNumber ID: $id Type: " . $type . " Length: $length cm.<br>";
     }
     return $listString;
-  }
-
-  private function userWantsVerboseList(): bool
-  {
-    return isset($_GET["verbose"]);
-  }
-
-  private function userWantsCompactList(): bool
-  {
-    return isset($_GET["compact"]);
-  }
-
-  private function userEntersSite(): bool
-  {
-    return empty($_GET);
   }
 }

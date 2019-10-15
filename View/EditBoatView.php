@@ -17,17 +17,17 @@ class EditBoatView
   {
     $id = $_POST["id"];
     $type = $_POST["updatedType"];
-    $length = (int)$_POST["updatedLength"];
+    $length = (int) $_POST["updatedLength"];
 
     return new \Model\Boat($id, $type, $length);
   }
 
-  public function userWantsToUpdateBoat()
+  public function userWantsToUpdateBoat(): bool
   {
     return isset($_POST["updatedLength"]);
   }
 
-  public function response($boatID): string
+  public function response(string $boatID): string
   {
     $memberID = (int) substr($boatID, 0, 1);
 
