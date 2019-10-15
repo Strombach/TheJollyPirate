@@ -36,7 +36,7 @@ class MemberView
     $ret = '<a href="?compact">Back to list</a>
     <a href="?editmember=' . $memberID . '">Edit member</a>';
 
-    $member = $this->ms->findMemberByID($memberID);
+    $member = $this->memberStorage->findMemberByID($memberID);
 
     $name = $member->getName();
     $id = $member->getID();
