@@ -82,8 +82,14 @@ class Member
     $memberIDString = $this->getID() . '_';
 
     for ($i = 1; $i <= sizeof($boatIDs); $i++) {
-      if ($boatIDs[$i - 1] != $memberIDString . $i) {
-        return $memberIDString . $i;
+      $idString = $memberIDString . $i;
+      $foundUsedKey = array_search($idString, $boatIDs, true);
+      if (is_int($foundUsedKey)) {
+        $foundUsedKey = true;
+      }
+
+      if (!$foundUsedKey) {
+        return $idString;
       }
     }
     return $memberIDString . (sizeof($boatIDs) + 1);

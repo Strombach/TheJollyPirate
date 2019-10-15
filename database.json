@@ -1,14 +1,1 @@
-[
-    {
-        "id": 1,
-        "name": "Dwayne Johnson",
-        "pn": "7205021234",
-        "boats": []
-    },
-    {
-        "id": 2,
-        "name": "Morgan Freeman",
-        "pn": "3706015678",
-        "boats": []
-    }
-]
+[{"id":1,"name":"Dwayne Johnson","pn":7205021234,"boats":[{"type":"Sailboat","lengthInCm":1313,"id":"1_6"},{"type":"Motorsailer","lengthInCm":700,"id":"1_1"}]},{"id":2,"name":"Morgan Freeman","pn":3706015678,"boats":[{"type":"Kayak\/Canoe","lengthInCm":100,"id":"2_1"}]}]
