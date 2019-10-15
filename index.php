@@ -12,6 +12,7 @@ require_once('Model/Boat.php');
 
 require_once('Controller/Controller.php');
 
+// error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 'On');
 

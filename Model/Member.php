@@ -14,7 +14,7 @@ class Member
   {
     $this->setID($id);
     $this->setName($name);
-    $this->setPersonalNumber((int)$personalNumber);
+    $this->setPersonalNumber((int) $personalNumber);
     $this->boats = $boats;
   }
 
