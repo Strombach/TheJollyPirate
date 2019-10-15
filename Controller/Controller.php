@@ -36,10 +36,10 @@ class Controller
     }
 
     if ($this->editMemberView->userWantsToUpdateMember()) {
-      $this->doUpdateMemberInfo();
+      $this->doUpdateMember();
     }
     if ($this->editBoatView->userWantsToUpdateBoat()) {
-      $this->doUpdateBoatInfo();
+      $this->doUpdateBoat();
     }
 
     if ($this->listView->userWantsToAddNewMember()) {
@@ -134,16 +134,16 @@ class Controller
     header("Location: /?member=$memberID");
   }
 
-  private function doUpdateMemberInfo(): void
+  private function doUpdateMember(): void
   {
     $updatedMemberObject = $this->editMemberView->getUpdatedMemberFromPost();
-    $this->memberStorage->updateMemberInfo($updatedMemberObject);
+    $this->memberStorage->updateMember($updatedMemberObject);
 
     $ID = $updatedMemberObject->getID();
     header("Location: /?member=$ID");
   }
 
-  private function doUpdateBoatInfo(): void
+  private function doUpdateBoat(): void
   {
     $updatedBoatObject = $this->editBoatView->getUpdatedBoatFromPost();
     $this->memberStorage->updateBoatInfo($updatedBoatObject);

@@ -10,12 +10,12 @@ class MemberStorage
   private $path;
 
 
-  public function __construct($path)
+  public function __construct(string $path)
   {
     $this->path = $path;
     $this->jsonFile = file_get_contents($this->path, true);
     $this->membersJSONArray = json_decode($this->jsonFile);
-    $this->members = $this->getMemberObjectArray();
+    $this->members = $this->createMembersFromDatabase();
   }
 
 
@@ -35,7 +35,7 @@ class MemberStorage
     return $memberIDs;
   }
 
-  public function getFirstVacantMemberID($memberIDs): int
+  public function getFirstVacantMemberID(array $memberIDs): int
   {
     for ($i = 1; $i <= sizeof($memberIDs); $i++) {
       if ($memberIDs[$i - 1] != $i) {
@@ -83,11 +83,11 @@ class MemberStorage
     $this->saveToDatabase();
   }
 
-  public function updateMemberInfo(\Model\Member $updatedMemberInfo): void
+  public function updateMember(\Model\Member $updatedMember): void
   {
-    $id = $updatedMemberInfo->getID();
-    $name = $updatedMemberInfo->getName();
-    $personalNumber = $updatedMemberInfo->getPersonalNumber();
+    $id = $updatedMember->getID();
+    $name = $updatedMember->getName();
+    $personalNumber = $updatedMember->getPersonalNumber();
 
     $member = $this->findMemberByID($id);
 
@@ -97,11 +97,11 @@ class MemberStorage
     $this->saveToDatabase();
   }
 
-  public function updateBoatInfo(\Model\Boat $updatedBoatInfo): void
+  public function updateBoat(\Model\Boat $updatedBoat): void
   {
-    $id = $updatedBoatInfo->getID();
-    $type = $updatedBoatInfo->getType();
-    $length = $updatedBoatInfo->getLength();
+    $id = $updatedBoat->getID();
+    $type = $updatedBoat->getType();
+    $length = $updatedBoat->getLength();
 
     $memberID = $memberID = (int) substr($id, 0, 1);
     $boat = $this->findBoatByID($memberID, $id);
@@ -112,10 +112,10 @@ class MemberStorage
     $this->saveToDatabase();
   }
 
-  public function findMemberByID(int $ID): \Model\Member
+  public function findMemberByID(int $id): \Model\Member
   {
     foreach ($this->members as $member) {
-      if ($member->getID() == $ID) {
+      if ($member->getID() == $id) {
         return $member;
       }
     }
@@ -131,9 +131,9 @@ class MemberStorage
     return $boat;
   }
 
-  public function removeMemberByID(int $ID): void
+  public function removeMemberByID(int $id): void
   {
-    $memberToRemove = $this->findMemberByID($ID);
+    $memberToRemove = $this->findMemberByID($id);
 
     $key = array_search($memberToRemove, $this->members);
     $removedMember = array_splice($this->members, $key, 1);
@@ -145,21 +145,21 @@ class MemberStorage
     $this->saveToDatabase();
   }
 
-  private function getMemberObjectArray(): array
+  private function createMembersFromDatabase(): array
   {
     $memberObjectArray = array();
     for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
       $ID = $this->membersJSONArray[$i]->id;
       $name = $this->membersJSONArray[$i]->name;
       $personalNumber = $this->membersJSONArray[$i]->pn;
-      $boats = $this->createBoatObjects($this->membersJSONArray[$i]->boats);
+      $boats = $this->createBoatsFromMember($this->membersJSONArray[$i]->boats);
 
       array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
     }
     return $memberObjectArray;
   }
 
-  private function createBoatObjects($boats): array
+  private function createBoatsFromMember(array $boats): array
   {
     $ret = array();
 
