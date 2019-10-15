@@ -4,27 +4,27 @@ namespace Model;
 
 class Member
 {
-  private $ID;
+  private $id;
   private $name;
   private $personalNumber;
   private $boats;
 
   // Arguments are NOT strictly typed because the setter handles errors.
-  public function __construct($ID, $name, $personalNumber, $boats)
+  public function __construct(int $id, string $name, $personalNumber, array $boats)
   {
-    $this->setID($ID);
+    $this->setID($id);
     $this->setName($name);
     $this->setPersonalNumber((int)$personalNumber);
     $this->boats = $boats;
   }
 
 
-  public function setID($ID): void
+  public function setID(int $id): void
   {
-    $this->ID = $ID;
+    $this->id = $id;
   }
 
-  public function setName($name): void
+  public function setName(string $name): void
   {
     if (strlen($name) >= 2) {
       $this->name = $name;
@@ -33,7 +33,7 @@ class Member
     }
   }
 
-  public function setPersonalNumber($personalNumber): void
+  public function setPersonalNumber(int $personalNumber): void
   {
     if (is_int($personalNumber) && strlen($personalNumber) == 10) {
       $this->personalNumber = $personalNumber;
@@ -42,11 +42,9 @@ class Member
     }
   }
 
-
-
   public function getID(): int
   {
-    return $this->ID;
+    return $this->id;
   }
 
   public function getName(): string
@@ -59,14 +57,14 @@ class Member
     return $this->personalNumber;
   }
 
-  public function getBoatCount(): int
-  {
-    return count($this->boats);
-  }
-
   public function getBoats(): array
   {
     return $this->boats;
+  }
+
+  public function getBoatCount(): int
+  {
+    return count($this->boats);
   }
 
   public function getBoatIDs(): array
@@ -79,7 +77,7 @@ class Member
     return $boatIDs;
   }
 
-  public function getFirstVacantBoatID($boatIDs): string
+  public function getFirstVacantBoatID(array $boatIDs): string
   {
     $memberIDString = $this->getID() . '_';
 
@@ -91,23 +89,23 @@ class Member
     return $memberIDString . (sizeof($boatIDs) + 1);
   }
 
-  public function addBoat(\Model\Boat $newBoat): void
+  public function addBoatToMember(\Model\Boat $newBoat): void
   {
     array_push($this->boats, $newBoat);
   }
 
-  public function findBoatByID(string $ID): \Model\Boat
+  public function findBoatByID(string $id): \Model\Boat
   {
     foreach ($this->boats as $boat) {
-      if ($boat->getID() == $ID) {
+      if ($boat->getID() == $id) {
         return $boat;
       }
     }
   }
 
-  public function removeBoatByID(string $ID): void
+  public function removeBoatByID(string $id): void
   {
-    $boatToRemove = $this->findBoatByID($ID);
+    $boatToRemove = $this->findBoatByID($id);
 
     $key = array_search($boatToRemove, $this->boats);
     $removedBoat = array_splice($this->boats, $key, 1);

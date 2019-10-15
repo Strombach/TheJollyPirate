@@ -4,12 +4,12 @@ namespace View;
 
 class MemberView
 {
-  private $ms;
+  private $memberStorage;
 
 
-  public function __construct(\Model\MemberStorage $mS)
+  public function __construct(\Model\MemberStorage $memberStorage)
   {
-    $this->ms = $mS;
+    $this->memberStorage = $memberStorage;
   }
 
 

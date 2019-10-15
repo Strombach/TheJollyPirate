@@ -38,11 +38,17 @@ class MemberStorage
   public function getFirstVacantMemberID(array $memberIDs): int
   {
     for ($i = 1; $i <= sizeof($memberIDs); $i++) {
-      if ($memberIDs[$i - 1] != $i) {
+      $foundUsedKey = array_search($i, $memberIDs, true);
+      if (is_int($foundUsedKey)) {
+        $foundUsedKey = true;
+      }
+
+      if (!$foundUsedKey) {
         return $i;
       }
     }
-    return sizeof($memberIDs) + 1;
+    $vacantID = (count($memberIDs) + 1);
+    return $vacantID;
   }
 
   public function saveToDatabase(): void

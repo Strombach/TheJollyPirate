@@ -113,7 +113,7 @@ class Controller
 
     $newBoat = new \Model\Boat($IDToUse, $newBoatInfo->type, $newBoatInfo->length);
 
-    $memberToAddBoatTo->addBoat($newBoat);
+    $memberToAddBoatTo->addBoatToMember($newBoat);
 
     $this->memberStorage->saveToDatabase();
 

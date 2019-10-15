@@ -98,6 +98,7 @@ class ListView
 
       $listString .= "<li>$name ($pn), Member ID $id:<br> " . $boatList . "
       <a href='?member=" . $id . "'>Manage</a>
+      <a href='?delete=" . $id . "'>Delete</a>
       </li>";
     }
     return $listString;
