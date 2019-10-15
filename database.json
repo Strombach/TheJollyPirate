@@ -1,1 +1,14 @@
-[{"id":3,"name":"Herr apa","pn":1231231234,"boats":[]},{"id":2,"name":"Herr apa","pn":1231231234,"boats":[]},{"id":4,"name":"Herr apa","pn":1231231234,"boats":[]},{"id":1,"name":"Herr apa","pn":1231231234,"boats":[]},{"id":6,"name":"qweqwe","pn":1231231234,"boats":[]},{"id":7,"name":"kepsmannen","pn":1231231234,"boats":[]},{"id":5,"name":"utter","pn":1231231234,"boats":[]}]
+[
+    {
+        "id": 1,
+        "name": "Dwayne Johnson",
+        "p.n": "19720502-1234",
+        "boats": []
+    },
+    {
+        "id": 2,
+        "name": "Morgan Freeman",
+        "p.n": "19370601-5678",
+        "boats": []
+    }
+]
