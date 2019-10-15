@@ -4,9 +4,13 @@ namespace View;
 
 class PageView
 {
+  private $errorMessage = '';
+  private $view;
 
-  public function render($v)
+
+  public function render($view)
   {
+    $this->view = $view;
     echo '<!DOCTYPE html
       <html>
         <head>
@@ -17,26 +21,34 @@ class PageView
         <body>
           <h1>The Jolly Pirate</h1>
           <div class="container">
-            ' . $this->viewToRender($v) . '
+            ' . $this->viewToRender($view) . '
+            ' . $this->errorMessage . '
           </div>
           <footer>
             <h3>Created By</h3>
+            <p>Dennis Fredsson • Fredrik Strömbäck • Markus Öhlén</p>
           </footer>
         </body>
       </html>
     ';
   }
 
-  private function viewToRender($v)
+  public function setErrorMessage (string $errorMessage) {
+    $this->errorMessage = $errorMessage;
+    $this->render($this->view);
+  }
+
+
+  private function viewToRender($view)
   {
-    if ($v instanceof \View\ListView) {
-      return $v->response();
-    } else if ($v instanceof \View\MemberView) {
-      return $v->response((int) $_GET["member"]);
-    } else if ($v instanceof \View\EditMemberView) {
-      return $v->response((int) $_GET["editmember"]);
-    } else if ($v instanceof \View\EditBoatView) {
-      return $v->response($_GET["editboat"]);
+    if ($view instanceof \View\ListView) {
+      return $view->response();
+    } else if ($view instanceof \View\MemberView) {
+      return $view->response((int) $_GET["member"]);
+    } else if ($view instanceof \View\EditMemberView) {
+      return $view->response((int) $_GET["editmember"]);
+    } else if ($view instanceof \View\EditBoatView) {
+      return $view->response($_GET["editboat"]);
     }
   }
 }

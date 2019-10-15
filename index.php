@@ -29,5 +29,6 @@ try {
 
     $controller->doRenderPageView();
 } catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    $errorMessageString =  'Error: ' .  $e->getMessage() . "\n";
+    $views->pageView->setErrorMessage($errorMessageString);
 }

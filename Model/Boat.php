@@ -2,15 +2,16 @@
 
 namespace Model;
 
+use Exception;
+
 class Boat
 {
   private $type;
   private $lengthInCm;
   private $id;
 
-
-
-  public function __construct(string $id, string $type, int $lengthInCm)
+  // Arguments are NOT strictly typed because the setter handles errors.
+  public function __construct(string $id, $type, $lengthInCm)
   {
     $this->id = $id;
     $this->updateType($type);
@@ -18,10 +19,12 @@ class Boat
   }
 
 
-  public function updateLength(int $newLength): void
+  public function updateLength($newLength): void
   {
     if ($newLength > 0 && is_int($newLength) === true) {
       $this->lengthInCm = $newLength;
+    } else {
+      throw new Exception('Boat length must be a number and greater than zero.');
     }
   }
 
@@ -29,8 +32,6 @@ class Boat
   {
     $this->type = $newType;
   }
-
-
 
   public function getType(): string
   {

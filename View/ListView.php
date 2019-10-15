@@ -66,7 +66,7 @@ class ListView
     <label for='fullname'>Full Name:</label>
     <input type='text' name='fullname' placeholder='John Doe'>
     <label for='ssn'>Social Security Number:</label>
-    <input type='text' name='ssn' placeholder='YYMMDD-XXXX'>
+    <input type='text' name='ssn' placeholder='YYMMDDXXXX'>
 
     <input type='submit' value='Add new member'>
 

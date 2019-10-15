@@ -6,11 +6,14 @@ use Model\MemberStorage;
 
 class Controller
 {
-  private $lv;
-  private $pv;
-  private $mv;
+  private $memberStorage;
+  private $pageView;
+  private $listView;
+  private $memberView;
+  private $editMemberView;
+  private $editBoatView;
 
-  // public function __construct(\View\ListView $lV, \View\PageView $pV, \View\MemberView $mV, \View\EditMemberView $eMV, \Model\MemberStorage $mS, \View\EditBoatView $eBV)
+
   public function __construct(object $views)
   {
     $this->memberStorage = $views->memberStorage;
@@ -36,7 +39,6 @@ class Controller
     if ($this->editMemberView->userWantsToUpdateMemberInfo()) {
       $this->doUpdateMemberInfo();
     }
-
     if ($this->editBoatView->userWantsToUpdateBoatInfo()) {
       $this->doUpdateBoatInfo();
     }
@@ -55,6 +57,7 @@ class Controller
       $this->doDeleteBoat();
     }
   }
+
 
   private function doRenderListView(): void
   {
@@ -102,7 +105,7 @@ class Controller
   private function doAddBoat(): void
   {
     $memberToAddBoatTo = $this->memberStorage->findMemberByID($_GET["member"]);
-    
+
     $newBoatInfo = $this->memberView->getNewBoatInfoFromPost();
 
     $boatIDs = $memberToAddBoatTo->getBoatIDs();
@@ -123,7 +126,7 @@ class Controller
   {
     $memberID = substr($_GET["deleteboat"], 0, 1);
     $memberToDeleteBoatFrom = $this->memberStorage->findMemberByID($memberID);
-    
+
     $boatToDeleteID = $_GET["deleteboat"];
     $memberToDeleteBoatFrom->removeBoatByID($boatToDeleteID);
 
