@@ -2,6 +2,11 @@
 
 namespace View;
 
+/**
+ * The main class that generates the
+ * whole html string that is echoed
+ * to the client
+ */
 class PageView
 {
 
