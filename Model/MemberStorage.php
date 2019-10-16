@@ -57,10 +57,8 @@ class MemberStorage
   }
 
   /**
-   * Creates an array of objects
-   * with every member and their boats.
-   * After the array is created the 
-   * objects are converted to JSON and
+   * Creates an array of objects with every member and their boats.
+   * After the array is created the  objects are converted to JSON and
    * saved to the database-file.
    */
   public function saveToDatabase(): void

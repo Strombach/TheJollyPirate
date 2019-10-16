@@ -4,9 +4,7 @@ namespace Controller;
 
 /**
  * Class for Controller.
- * Gathers information from the programs'
- * different views and performs
- * actions thereafter.
+ * Gathers information from the programs' different views and performs actions thereafter.
  */
 class Controller
 {

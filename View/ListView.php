@@ -3,10 +3,8 @@
 namespace View;
 
 /**
- * Class that handles rendering
- * of lists of members and their
- * respective boats in a compact
- * or a verbose manner
+ * Class that handles rendering of lists of members and their
+ * respective boats in a compact or a verbose manner.
  */
 class ListView
 {
@@ -21,9 +19,8 @@ class ListView
   }
 
   /**
-   * This method returns a html string
-   * with a list of all members in
-   * either compact or verbose form
+   * This method returns a HTML string with a list of all members in
+   * either compact or verbose form.
    */
   public function response(): string
   {

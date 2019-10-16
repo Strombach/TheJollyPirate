@@ -3,13 +3,8 @@
 namespace View;
 
 /**
- * Class that creates a form
- * for a specific boat and
- * handles the input of the
- * form to create a 
- * Boat object from that
- * data that is used to update
- * an existing boat.
+ * Class that creates a form for a specific boat and handles the input of the
+ * form to create a Boat object from that data that is used to update an existing boat.
  */
 class EditBoatView
 {
@@ -37,9 +32,9 @@ class EditBoatView
   }
 
   /**
-   * This method returns a html string
-   * with a form prefilled with details 
+   * This method returns a html string with a form prefilled with details 
    * about a specific boat.
+   * 
    * @param {string} $boatID The id of a boat.
    */
   public function response(string $boatID): string

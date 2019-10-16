@@ -3,9 +3,7 @@
 namespace View;
 
 /**
- * The class creates the HTML
- * for a specific member and 
- * presents the members boats.
+ * The class creates the HTML for a specific member and presents the members boats.
  */
 class MemberView
 {

@@ -3,19 +3,15 @@
 namespace View;
 
 /**
- * The main class that generates the
- * whole html string that is echoed
- * to the client
+ * The main class. Generates the entire HTML string that is echoed to the client.
  */
 class PageView
 {
 
   /**
-   * This method echoes out the complete
-   * html page.
-   * @param {View} $view This is the view
-   * that should be rendered in the body of
-   * the page.
+   * This method echoes out the complete html page.
+   * 
+   * @param {View} $view This is the view that should be rendered in the body of the page.
    */
   public function render($view): void
   {
