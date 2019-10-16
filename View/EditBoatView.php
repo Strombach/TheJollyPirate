@@ -2,6 +2,15 @@
 
 namespace View;
 
+/**
+ * Class that creates a form
+ * for a specific boat and
+ * handles the input of the
+ * form to create a 
+ * Boat object from that
+ * data that is used to update
+ * an existing boat.
+ */
 class EditBoatView
 {
   private $ms;
