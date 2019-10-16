@@ -14,7 +14,11 @@ class ListView
     $this->memberStorage = $memberStorage;
   }
 
-
+  /**
+   * This method returns a html string
+   * with a list of all members in
+   * either compact or verbose form
+   */
   public function response(): string
   {
     $ret = '';
