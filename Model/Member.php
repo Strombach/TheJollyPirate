@@ -85,6 +85,14 @@ class Member
     return $boatIDs;
   }
 
+    /**
+   * Searches the Members boats for IDs, and returns the first vacant one.
+   * For example: Member has boats with IDs "1_1" and "1_3".
+   * This method would then return "1_2".
+   *
+   * @param array $boatIDs
+   * @return string
+   */
   public function getFirstVacantBoatID(array $boatIDs): string
   {
     $memberIDString = $this->getID() . '_';
