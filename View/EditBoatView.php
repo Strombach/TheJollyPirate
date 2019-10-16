@@ -27,6 +27,12 @@ class EditBoatView
     return isset($_POST["updatedLength"]);
   }
 
+  /**
+   * This method returns a html string
+   * with a form prefilled with details 
+   * about a specific boat.
+   * @param {string} $boatID The id of a boat.
+   */
   public function response(string $boatID): string
   {
     $memberID = (int) substr($boatID, 0, 1);
