@@ -2,6 +2,9 @@
 
 namespace View;
 
+/**
+ * The class creates the HTML for a specific member and presents the members boats.
+ */
 class MemberView
 {
   private $memberStorage;
@@ -31,6 +34,13 @@ class MemberView
     return $boatInfo;
   }
 
+
+  /**
+   * This method returns a html string
+   * with all the details of a specific
+   * member.
+   * @param {int} $memberID The id of a member.
+   */
   public function response(int $memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>

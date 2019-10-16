@@ -2,6 +2,11 @@
 
 namespace Model;
 
+/**
+ * Class for MemberStorage.
+ * Handles instanced Members and their respective Boats.
+ * The class includes persistent storage by using a JSON-database.
+ */
 class MemberStorage
 {
   private $members;
@@ -51,6 +56,11 @@ class MemberStorage
     return $vacantID;
   }
 
+  /**
+   * Creates an array of objects with every member and their boats.
+   * After the array is created the  objects are converted to JSON and
+   * saved to the database-file.
+   */
   public function saveToDatabase(): void
   {
     $membersJSON = array();

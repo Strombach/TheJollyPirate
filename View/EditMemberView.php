@@ -2,6 +2,11 @@
 
 namespace View;
 
+/**
+ * Class that creates a form for a specific member and handles the input of the
+ * form to create a  Member object from that data to update an existing
+ * member in the database.
+ */
 class EditMemberView
 {
   private $ms;
@@ -28,6 +33,12 @@ class EditMemberView
     return isset($_GET["deleteboat"]);
   }
 
+
+  /**
+   * This method returns a html string with a form prefilled with details about a specific member.
+   * 
+   * @param {int} $memberID The id of a member.
+   */
   public function response(int $memberID): string
   {
     $ret = "<form action='?member=$memberID' method='post'>

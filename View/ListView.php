@@ -2,6 +2,10 @@
 
 namespace View;
 
+/**
+ * Class that handles rendering of lists of members and their
+ * respective boats in a compact or a verbose manner.
+ */
 class ListView
 {
   private $members;
@@ -14,7 +18,10 @@ class ListView
     $this->memberStorage = $memberStorage;
   }
 
-
+  /**
+   * This method returns a HTML string with a list of all members in
+   * either compact or verbose form.
+   */
   public function response(): string
   {
     $ret = '';
