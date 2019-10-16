@@ -4,7 +4,9 @@ namespace Model;
 
 /**
  * Class for Boat.
- * Contains information such as type, length and id for the instanced object, and getters/setters.
+ * Contains information such as type,
+ * length and id for the instanced object,
+ * and getters/setters.
  * The setter for length contains some error handling.
  */
 class Boat

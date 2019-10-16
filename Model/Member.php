@@ -2,6 +2,14 @@
 
 namespace Model;
 
+/**
+ * Class for Member.
+ * Contains information such as name,
+ * personal number and id for the instanced object.
+ * This class includes instances of the Boat-class,
+ * stored in the array variable $boats.
+ * The setters for name and personal number includes error handling.
+ */
 class Member
 {
   private $id;
