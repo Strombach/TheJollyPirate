@@ -31,6 +31,13 @@ class MemberView
     return $boatInfo;
   }
 
+
+  /**
+   * This method returns a html string
+   * with all the details of a specific
+   * member.
+   * @param {int} $memberID The id of a member.
+   */
   public function response(int $memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>
