@@ -5,6 +5,13 @@ namespace View;
 class PageView
 {
 
+  /**
+   * This method echoes out the complete
+   * html page.
+   * @param {View} $view This is the view
+   * that should be rendered in the body of
+   * the page.
+   */
   public function render($view): void
   {
     echo '<!DOCTYPE html
