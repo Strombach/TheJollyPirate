@@ -2,6 +2,14 @@
 
 namespace View;
 
+/**
+ * Class that creates a form
+ * for a specific member and
+ * handles the input of the
+ * form to create a 
+ * Member object from that
+ * data.
+ */
 class EditMemberView
 {
   private $ms;
