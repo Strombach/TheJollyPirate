@@ -28,6 +28,13 @@ class EditMemberView
     return isset($_GET["deleteboat"]);
   }
 
+
+    /**
+   * This method returns a html string
+   * with a form prefilled with details 
+   * about a specific member.
+   * @param {int} $memberID The id of a member.
+   */
   public function response(int $memberID): string
   {
     $ret = "<form action='?member=$memberID' method='post'>
