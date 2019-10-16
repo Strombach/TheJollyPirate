@@ -8,7 +8,8 @@ namespace View;
  * handles the input of the
  * form to create a 
  * Member object from that
- * data.
+ * data to update an existing
+ * member in the database.
  */
 class EditMemberView
 {
