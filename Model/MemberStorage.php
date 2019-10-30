@@ -10,16 +10,12 @@ namespace Model;
 class MemberStorage
 {
   private $members;
-  private $jsonFile;
-  private $membersJSONArray;
   private $path;
 
 
   public function __construct(string $path)
   {
     $this->path = $path;
-    $this->jsonFile = file_get_contents($this->path, true);
-    $this->membersJSONArray = json_decode($this->jsonFile);
     $this->members = $this->createMembersFromDatabase();
   }
 
@@ -163,12 +159,16 @@ class MemberStorage
 
   private function createMembersFromDatabase(): array
   {
+    $jsonFile = file_get_contents($this->path, true);
+    $membersJSONArray = json_decode($jsonFile);
+
     $memberObjectArray = array();
-    for ($i = 0; $i < sizeof($this->membersJSONArray); $i++) {
-      $ID = $this->membersJSONArray[$i]->id;
-      $name = $this->membersJSONArray[$i]->name;
-      $personalNumber = $this->membersJSONArray[$i]->pn;
-      $boats = $this->createBoatsFromMember($this->membersJSONArray[$i]->boats);
+
+    for ($i = 0; $i < sizeof($membersJSONArray); $i++) {
+      $ID = $membersJSONArray[$i]->id;
+      $name = $membersJSONArray[$i]->name;
+      $personalNumber = $membersJSONArray[$i]->pn;
+      $boats = $this->createBoatsFromMember($membersJSONArray[$i]->boats);
 
       array_push($memberObjectArray, new \Model\Member($ID, $name, $personalNumber, $boats));
     }
