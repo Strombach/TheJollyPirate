@@ -107,7 +107,7 @@ class Controller
 
   private function doAddBoat(): void
   {
-    $memberToAddBoatTo = $this->memberStorage->findMemberByID($this->wantsMemberPage());
+    $memberToAddBoatTo = $this->memberStorage->findMemberByID($this->memberView->getUserID());
 
     $newBoatInfo = $this->memberView->getNewBoatInfoFromPost();
 
@@ -121,7 +121,7 @@ class Controller
 
     $this->memberStorage->saveToDatabase();
 
-    $ID = $this->wantsMemberPage();
+    $ID = $this->memberView->getUserID();
     header("Location: /?member=$ID");
   }
 

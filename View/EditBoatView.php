@@ -10,6 +10,11 @@ class EditBoatView
 {
   private $ms;
 
+  private static $id = "EditBoatView::ID";
+  private static $updatedType = "EditBoatView::UpdatedType";
+  private static $updatedLength = "EditBoatView::UpdatedLength";
+  private static $member = \View\Config\Constants::memberURL;
+
 
   public function __construct(\Model\MemberStorage $mS)
   {
@@ -19,16 +24,16 @@ class EditBoatView
 
   public function getUpdatedBoatFromPost(): \Model\Boat
   {
-    $id = $_POST["id"];
-    $type = $_POST["updatedType"];
-    $length = (int) $_POST["updatedLength"];
+    $id = $_POST[self::$id];
+    $type = $_POST[self::$updatedType];
+    $length = (int) $_POST[self::$updatedLength];
 
     return new \Model\Boat($id, $type, $length);
   }
 
   public function userWantsToUpdateBoat(): bool
   {
-    return isset($_POST["updatedLength"]);
+    return isset($_POST[self::$updatedLength]);
   }
 
   /**
@@ -41,7 +46,7 @@ class EditBoatView
   {
     $memberID = (int) substr($boatID, 0, 1);
 
-    $ret = "<form action='?member=$memberID' method='post'>
+    $ret = "<form action='?" . self::$member . "=$memberID' method='post'>
     <input type='submit' value='Save'>";
 
     $boat = $this->ms->findBoatByID($memberID, $boatID);
@@ -62,16 +67,16 @@ class EditBoatView
     $ret = "";
 
     $ret .= "
-    <p>ID: <input readonly type='text' name='id' value='$id'></p>
+    <p>ID: <input readonly type='text' name='" . self::$id . "' value='$id'></p>
     <p>Type:</p>
-    <select type='dropdown' name='updatedType'>
-      <option name='updatedType' value='Sailboat'>Sailboat</option>
-      <option name='updatedType' value='Motorsailer'>Motorsailer</option>
-      <option name='updatedType' value='Kayak/Canoe'>Kayak/Canoe</option>
-      <option name='updatedType' value='Other'>Other</option>
+    <select type='dropdown' name='" . self::$updatedType . "'>
+      <option name='" . self::$updatedType . "' value='Sailboat'>Sailboat</option>
+      <option name='" . self::$updatedType . "' value='Motorsailer'>Motorsailer</option>
+      <option name='" . self::$updatedType . "' value='Kayak/Canoe'>Kayak/Canoe</option>
+      <option name='" . self::$updatedType . "' value='Other'>Other</option>
     </select>
     <br>
-    <p>Length: <input type='text' name='updatedLength' value='$length'>cm</p>
+    <p>Length: <input type='text' name='" . self::$updatedLength . "' value='$length'>cm</p>
     ";
 
     return $ret;

@@ -11,8 +11,12 @@ class EditMemberView
 {
   private $ms;
 
+  private static $id = "EditMemberView::ID";
+  private static $name = "EditMemberView::Name";
+  private static $pn = "EditMemberView::Pn";
   private static $editMember = "editmember";
   private static $member = \View\Config\Constants::memberURL;
+  private static $deleteBoat = \View\Config\Constants::deleteBoatURL;
 
 
   public function __construct(\Model\MemberStorage $mS)
@@ -28,17 +32,17 @@ class EditMemberView
 
   public function getUpdatedMemberFromPost(): \Model\Member
   {
-    return new \Model\Member($_POST["id"], $_POST["name"], $_POST["pn"], []);
+    return new \Model\Member($_POST[self::$id], $_POST[self::$name], $_POST[self::$pn], []);
   }
 
   public function userWantsToUpdateMember(): bool
   {
-    return isset($_POST["name"]);
+    return isset($_POST[self::$name]);
   }
 
   public function userWantsToDeleteBoat(): bool
   {
-    return isset($_GET["deleteboat"]);
+    return isset($_GET[self::$deleteBoat]);
   }
 
 
@@ -72,9 +76,9 @@ class EditMemberView
     $ret = "";
 
     $ret .= "
-    <p>Name: <input type='text' name='name' value='$name'></p>
-    <p>ID: <input readonly type='text' name='id' value='$id'></p>
-    <p>Personal Number: <input type='text' name='pn' value='$pn'></p>
+    <p>Name: <input type='text' name='" . self::$name . "' value='$name'></p>
+    <p>ID: <input readonly type='text' name='" . self::$id . "' value='$id'></p>
+    <p>Personal Number: <input type='text' name='" . self::$pn . "' value='$pn'></p>
     ";
 
     $ret .= $this->createBoatTable($boats);
@@ -114,7 +118,7 @@ class EditMemberView
       <td>$type</td>
       <td>$length cm</td>
       <td><a href='?editboat=" . $id . "'>Edit</a></td>
-      <td><a href='?deleteboat=" . $id . "'>Delete</a></td>
+      <td><a href='?" . self::$deleteBoat . "=" . $id . "'>Delete</a></td>
     </tr>";
     }
     return $ret;
