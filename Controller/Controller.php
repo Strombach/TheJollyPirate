@@ -127,7 +127,6 @@ class Controller
 
   private function doDeleteBoat(): void
   {
-    // wantsToDeleteBoat()
     $memberID = substr($this->editMemberView->getBoatToDelete(), 0, 1);
     $memberToDeleteBoatFrom = $this->memberStorage->findMemberByID($memberID);
 
