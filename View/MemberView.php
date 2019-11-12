@@ -12,7 +12,7 @@ class MemberView
   private static $type = "MemberView::Type";
   private static $length = "MemberView::Length";
   private static $member = \View\Config\Constants::memberURL;
-
+  private static $editMember = \View\Config\Constants::editMemberURL;
 
   public function __construct(\Model\MemberStorage $memberStorage)
   {
@@ -58,7 +58,7 @@ class MemberView
   public function response(int $memberID): string
   {
     $ret = '<a href="?compact">Back to list</a>
-    <a href="?editmember=' . $memberID . '">Edit member</a>';
+    <a href="?' . self::$editMember . '=' . $memberID . '">Edit member</a>';
 
     $member = $this->memberStorage->findMemberByID($memberID);
 

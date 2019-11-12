@@ -14,9 +14,10 @@ class EditMemberView
   private static $id = "EditMemberView::ID";
   private static $name = "EditMemberView::Name";
   private static $pn = "EditMemberView::Pn";
-  private static $editMember = "editmember";
+  private static $editMember = \View\Config\Constants::editMemberURL;
   private static $member = \View\Config\Constants::memberURL;
   private static $deleteBoat = \View\Config\Constants::deleteBoatURL;
+  private static $editBoat = \View\Config\Constants::editBoatURL;
 
 
   public function __construct(\Model\MemberStorage $mS)
@@ -117,7 +118,7 @@ class EditMemberView
       <td>$id</td>
       <td>$type</td>
       <td>$length cm</td>
-      <td><a href='?editboat=" . $id . "'>Edit</a></td>
+      <td><a href='?" . self::$editBoat . "=" . $id . "'>Edit</a></td>
       <td><a href='?" . self::$deleteBoat . "=" . $id . "'>Delete</a></td>
     </tr>";
     }
