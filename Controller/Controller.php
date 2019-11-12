@@ -85,14 +85,8 @@ class Controller
   private function doAddNewMember(): void
   {
     $newMemberInfo = $this->listView->getNewMemberFromPost();
+    $this->memberStorage->addMember($newMemberInfo);
 
-    $memberIDs = $this->memberStorage->getMemberIDs();
-
-    $IDToUse = $this->memberStorage->getFirstVacantMemberID($memberIDs);
-
-    $newMember = new \Model\Member($IDToUse, $newMemberInfo->name, $newMemberInfo->ssn, array());
-
-    $this->memberStorage->addMember($newMember);
 
     $this->listView->redirect();
   }
@@ -155,7 +149,7 @@ class Controller
     $this->memberStorage->updateBoat($updatedBoatObject);
 
     $ID = $updatedBoatObject->getID();
-    
+
     $this->memberView->redirect($ID);
   }
 }

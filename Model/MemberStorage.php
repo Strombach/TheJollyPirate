@@ -88,10 +88,12 @@ class MemberStorage
     file_put_contents($this->path, $membersJSON);
   }
 
-  public function addMember(\Model\Member $newMember): void
+  public function addMember(object $newMemberInfo): void
   {
+    $memberIDs = $this->getMemberIDs();
+    $IDToUse = $this->getFirstVacantMemberID($memberIDs);
+    $newMember = new \Model\Member($IDToUse, $newMemberInfo->name, $newMemberInfo->ssn, array());
     array_push($this->members, $newMember);
-
     $this->saveToDatabase();
   }
 
