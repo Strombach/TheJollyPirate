@@ -1,1 +1,1 @@
-[{"id":1,"name":"Dwayne Johnson","pn":7205021234,"boats":[{"type":"Sailboat","lengthInCm":9999,"id":"1_6"},{"type":"Kayak\/Canoe","lengthInCm":70000,"id":"1_1"},{"type":"Sailboat","lengthInCm":789,"id":"1_2"},{"type":"Sailboat","lengthInCm":789,"id":"1_3"}]},{"id":2,"name":"Test","pn":1010101010,"boats":[]}]
+[{"id":1,"name":"Dwayne Johnson","pn":1010101010,"boats":[{"type":"Sailboat","lengthInCm":9999,"id":"1_6"},{"type":"Kayak\/Canoe","lengthInCm":70000,"id":"1_1"},{"type":"Other","lengthInCm":456,"id":"1_2"},{"type":"Sailboat","lengthInCm":789,"id":"1_3"}]}]

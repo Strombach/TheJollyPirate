@@ -61,7 +61,7 @@ class EditMemberView
     $ret = "<form action='?" . self::$member . "=$memberID' method='post'>
     <input type='submit' value='Save'>";
 
-    $member = $this->ms->findMemberByID($memberID);
+    $member = $this->memberStorage->findMemberByID($memberID);
 
     $name = $member->getName();
     $id = $member->getID();
