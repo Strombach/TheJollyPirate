@@ -42,7 +42,7 @@ class PageView
     if ($view instanceof \View\ListView) {
       return $view->response();
     } else if ($view instanceof \View\MemberView) {
-      return $view->response((int) $_GET["member"]);
+      return $view->response($view->getUserID());
     } else if ($view instanceof \View\EditMemberView) {
       return $view->response((int) $_GET["editmember"]);
     } else if ($view instanceof \View\EditBoatView) {

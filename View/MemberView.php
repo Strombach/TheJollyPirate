@@ -9,6 +9,10 @@ class MemberView
 {
   private $memberStorage;
 
+  private static $type = "MemberView::Type";
+  private static $length = "MemberView::Length";
+  private static $member = "member";
+
 
   public function __construct(\Model\MemberStorage $memberStorage)
   {
@@ -16,15 +20,25 @@ class MemberView
   }
 
 
+  public function wantsMemberPage()
+  {
+    return isset($_GET[self::$member]);
+  }
+
+  public function getUserID()
+  {
+    return (int) $_GET[self::$member];
+  }
+
   public function userWantsToAddBoat(): bool
   {
-    return isset($_POST["type"]);
+    return isset($_POST[self::$type]);
   }
 
   public function getNewBoatInfoFromPost(): object
   {
-    $type = $_POST["type"];
-    $length = (int) $_POST["length"];
+    $type = $_POST[self::$type];
+    $length = (int) $_POST[self::$length];
 
     $boatInfo = new \stdClass();
 
@@ -67,15 +81,15 @@ class MemberView
 
     <label for='type'>Boat type:</label>
     <br>
-    <select type='dropdown' name='type'>
-      <option name='type' value='Sailboat'>Sailboat</option>
-      <option name='type' value='Motorsailer'>Motorsailer</option>
-      <option name='type' value='Kayak/Canoe'>Kayak/Canoe</option>
-      <option name='type' value='Other'>Other</option>
+    <select type='dropdown' name='" . self::$type . "'>
+      <option name='" . self::$type . "' value='Sailboat'>Sailboat</option>
+      <option name='" . self::$type . "' value='Motorsailer'>Motorsailer</option>
+      <option name='" . self::$type . "' value='Kayak/Canoe'>Kayak/Canoe</option>
+      <option name='" . self::$type . "' value='Other'>Other</option>
     </select>
     <br>
-    <label for='length'>Length in Cm:</label>
-    <input type='text' name='length' placeholder='XXXX'>
+    <label for='" . self::$length . "'>Length in Cm:</label>
+    <input type='text' name='" . self::$length . "' placeholder='XXXX'>
 
     <input type='submit' value='Add new boat'>
 

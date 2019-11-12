@@ -29,7 +29,8 @@ class Controller
 
   public function doRenderPageView(): void
   {
-    if (isset($_GET["member"])) {
+    if ($this->memberView->wantsMemberPage()) {
+    // if (isset($_GET["member"])) {
       $this->doRenderMemberView();
     } else if (isset($_GET["editmember"])) {
       $this->doRenderEditMemberView();
