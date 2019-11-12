@@ -9,7 +9,7 @@ namespace View;
  */
 class EditMemberView
 {
-  private $ms;
+  private $memberStorage;
 
   private static $id = "EditMemberView::ID";
   private static $name = "EditMemberView::Name";
@@ -22,7 +22,7 @@ class EditMemberView
 
   public function __construct(\Model\MemberStorage $mS)
   {
-    $this->ms = $mS;
+    $this->memberStorage = $mS;
   }
 
   public function wantsEditMemberPage()

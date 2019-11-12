@@ -8,7 +8,7 @@ namespace View;
  */
 class EditBoatView
 {
-  private $ms;
+  private $memberStorage;
 
   private static $id = "EditBoatView::ID";
   private static $updatedType = "EditBoatView::UpdatedType";
@@ -18,7 +18,7 @@ class EditBoatView
 
   public function __construct(\Model\MemberStorage $mS)
   {
-    $this->ms = $mS;
+    $this->memberStorage = $mS;
   }
 
   public function wantsEditBoatPage()
@@ -53,7 +53,7 @@ class EditBoatView
     $ret = "<form action='?" . self::$member . "=$memberID' method='post'>
     <input type='submit' value='Save'>";
 
-    $boat = $this->ms->findBoatByID($memberID, $boatID);
+    $boat = $this->memberStorage->findBoatByID($memberID, $boatID);
 
     $id = $boat->getID();
     $type = $boat->getType();
