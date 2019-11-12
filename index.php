@@ -14,19 +14,21 @@ require_once('Model/Boat.php');
 
 require_once('Controller/Controller.php');
 
+ob_start();
+
 try {
-    $views = new stdClass();
+  $views = new stdClass();
 
-    $views->memberStorage = new \Model\MemberStorage('database.json');
-    $views->pageView = new \View\PageView();
-    $views->listView = new \View\ListView($views->memberStorage);
-    $views->memberView = new \View\MemberView($views->memberStorage);
-    $views->editMemberView = new \View\EditMemberView($views->memberStorage);
-    $views->editBoatView = new \View\EditBoatView($views->memberStorage);
+  $views->memberStorage = new \Model\MemberStorage('database.json');
+  $views->pageView = new \View\PageView();
+  $views->listView = new \View\ListView($views->memberStorage);
+  $views->memberView = new \View\MemberView($views->memberStorage);
+  $views->editMemberView = new \View\EditMemberView($views->memberStorage);
+  $views->editBoatView = new \View\EditBoatView($views->memberStorage);
 
-    $controller = new \Controller\Controller($views);
+  $controller = new \Controller\Controller($views);
 
-    $controller->doRenderPageView();
+  $controller->doRenderPageView();
 } catch (Exception $e) {
-    echo '<h3>Error: ',  $e->getMessage(), "\n</h3>";
+  echo '<h3>Error: ',  $e->getMessage(), "\n</h3>";
 }

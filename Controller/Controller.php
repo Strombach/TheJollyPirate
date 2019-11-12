@@ -33,7 +33,7 @@ class Controller
       $this->doRenderMemberView();
     } else if ($this->editMemberView->wantsEditMemberPage()) {
       $this->doRenderEditMemberView();
-    } else if (isset($_GET["editboat"])) {
+    } else if ($this->editBoatView->wantsEditBoatPage()) {
       $this->doRenderEditBoatView();
     } else {
       $this->doRenderListView();
@@ -99,7 +99,7 @@ class Controller
 
   private function doDeleteMember(): void
   {
-    $memberToDeleteID = $_GET["delete"];
+    $memberToDeleteID = $this->listView->getMemberToDelete();
     $this->memberStorage->removeMemberByID($memberToDeleteID);
 
     header("Location: /");
@@ -127,10 +127,11 @@ class Controller
 
   private function doDeleteBoat(): void
   {
-    $memberID = substr($_GET["deleteboat"], 0, 1);
+    // wantsToDeleteBoat()
+    $memberID = substr($this->editMemberView->getBoatToDelete(), 0, 1);
     $memberToDeleteBoatFrom = $this->memberStorage->findMemberByID($memberID);
 
-    $boatToDeleteID = $_GET["deleteboat"];
+    $boatToDeleteID = $this->editMemberView->getBoatToDelete();
     $memberToDeleteBoatFrom->removeBoatByID($boatToDeleteID);
 
     $this->memberStorage->saveToDatabase();
@@ -150,7 +151,8 @@ class Controller
   private function doUpdateBoat(): void
   {
     $updatedBoatObject = $this->editBoatView->getUpdatedBoatFromPost();
-    $this->memberStorage->updateBoatInfo($updatedBoatObject);
+    var_dump($updatedBoatObject);
+    $this->memberStorage->updateBoat($updatedBoatObject);
 
     $ID = $updatedBoatObject->getID();
     header("Location: /?member=$ID");

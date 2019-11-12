@@ -14,13 +14,17 @@ class EditBoatView
   private static $updatedType = "EditBoatView::UpdatedType";
   private static $updatedLength = "EditBoatView::UpdatedLength";
   private static $member = \View\Config\Constants::memberURL;
-
+  private static $editBoat = \View\Config\Constants::editBoatURL;
 
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
   }
 
+  public function wantsEditBoatPage()
+  {
+    return isset($_GET[self::$editBoat]);
+  }
 
   public function getUpdatedBoatFromPost(): \Model\Boat
   {

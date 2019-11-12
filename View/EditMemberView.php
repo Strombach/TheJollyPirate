@@ -25,10 +25,14 @@ class EditMemberView
     $this->ms = $mS;
   }
 
-
   public function wantsEditMemberPage()
   {
     return isset($_GET[self::$editMember]);
+  }
+
+  public function getBoatToDelete()
+  {
+    return $_GET[self::$deleteBoat];
   }
 
   public function getUpdatedMemberFromPost(): \Model\Member

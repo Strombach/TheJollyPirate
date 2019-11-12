@@ -44,6 +44,11 @@ class ListView
     return $ret;
   }
 
+  public function getMemberToDelete()
+  {
+    return $_GET[self::$delete];
+  }
+
   public function getNewMemberFromPost(): object
   {
     $name = $_POST[self::$fullname];
