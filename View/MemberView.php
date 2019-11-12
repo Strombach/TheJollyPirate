@@ -74,6 +74,11 @@ class MemberView
     return $ret;
   }
 
+  public function redirect($ID)
+  {
+    header("Location: /?" . self::$member . "=$ID");
+  }
+
 
   private function createAddBoatForm(int $id): string
   {

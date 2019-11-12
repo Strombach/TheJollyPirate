@@ -94,7 +94,7 @@ class Controller
 
     $this->memberStorage->addMember($newMember);
 
-    header("Location: /");
+    $this->listView->redirect();
   }
 
   private function doDeleteMember(): void
@@ -102,7 +102,7 @@ class Controller
     $memberToDeleteID = $this->listView->getMemberToDelete();
     $this->memberStorage->removeMemberByID($memberToDeleteID);
 
-    header("Location: /");
+    $this->listView->redirect();
   }
 
   private function doAddBoat(): void
@@ -122,7 +122,7 @@ class Controller
     $this->memberStorage->saveToDatabase();
 
     $ID = $this->memberView->getUserID();
-    header("Location: /?member=$ID");
+    $this->memberView->redirect($ID);
   }
 
   private function doDeleteBoat(): void
@@ -135,7 +135,7 @@ class Controller
 
     $this->memberStorage->saveToDatabase();
 
-    header("Location: /?member=$memberID");
+    $this->memberView->redirect($memberID);
   }
 
   private function doUpdateMember(): void
@@ -144,7 +144,8 @@ class Controller
     $this->memberStorage->updateMember($updatedMemberObject);
 
     $ID = $updatedMemberObject->getID();
-    header("Location: /?member=$ID");
+
+    $this->memberView->redirect($ID);
   }
 
   private function doUpdateBoat(): void
@@ -154,6 +155,7 @@ class Controller
     $this->memberStorage->updateBoat($updatedBoatObject);
 
     $ID = $updatedBoatObject->getID();
-    header("Location: /?member=$ID");
+    
+    $this->memberView->redirect($ID);
   }
 }

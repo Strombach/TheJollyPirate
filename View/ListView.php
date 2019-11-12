@@ -76,6 +76,11 @@ class ListView
     return isset($_GET[self::$delete]);
   }
 
+  public function redirect()
+  {
+    header("Location: /");
+  }
+
 
   private function userWantsVerboseList(): bool
   {
