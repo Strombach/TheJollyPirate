@@ -30,9 +30,8 @@ class Controller
   public function doRenderPageView(): void
   {
     if ($this->memberView->wantsMemberPage()) {
-    // if (isset($_GET["member"])) {
       $this->doRenderMemberView();
-    } else if (isset($_GET["editmember"])) {
+    } else if ($this->editMemberView->wantsEditMemberPage()) {
       $this->doRenderEditMemberView();
     } else if (isset($_GET["editboat"])) {
       $this->doRenderEditBoatView();
@@ -108,7 +107,7 @@ class Controller
 
   private function doAddBoat(): void
   {
-    $memberToAddBoatTo = $this->memberStorage->findMemberByID($_GET["member"]);
+    $memberToAddBoatTo = $this->memberStorage->findMemberByID($this->wantsMemberPage());
 
     $newBoatInfo = $this->memberView->getNewBoatInfoFromPost();
 
@@ -122,7 +121,7 @@ class Controller
 
     $this->memberStorage->saveToDatabase();
 
-    $ID = $_GET["member"];
+    $ID = $this->wantsMemberPage();
     header("Location: /?member=$ID");
   }
 

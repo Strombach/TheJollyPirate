@@ -11,7 +11,7 @@ class MemberView
 
   private static $type = "MemberView::Type";
   private static $length = "MemberView::Length";
-  private static $member = "member";
+  private static $member = \View\Config\Constants::memberURL;
 
 
   public function __construct(\Model\MemberStorage $memberStorage)
@@ -77,7 +77,7 @@ class MemberView
 
   private function createAddBoatForm(int $id): string
   {
-    $ret = "<form action='?member=$id' method='post'>
+    $ret = "<form action='?" . self::$member . "=$id' method='post'>
 
     <label for='type'>Boat type:</label>
     <br>

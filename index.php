@@ -6,6 +6,8 @@ require_once('View/MemberView.php');
 require_once('View/EditMemberView.php');
 require_once('View/EditBoatView.php');
 
+require_once('View/Config/Constants.php');
+
 require_once('Model/Member.php');
 require_once('Model/MemberStorage.php');
 require_once('Model/Boat.php');

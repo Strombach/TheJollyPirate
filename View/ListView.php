@@ -11,6 +11,13 @@ class ListView
   private $members;
   private $memberStorage;
 
+  private static $member = \View\Config\Constants::memberURL;
+  private static $fullname = "ListView::Fullname";
+  private static $ssn = "ListView::Ssn";
+  private static $delete = \View\Config\Constants::deleteURL;
+  private static $verbose = \View\Config\Constants::verboseURL;
+  private static $compact = \View\Config\Constants::compactURL;
+
 
   public function __construct($memberStorage)
   {
@@ -39,8 +46,8 @@ class ListView
 
   public function getNewMemberFromPost(): object
   {
-    $name = $_POST["fullname"];
-    $ssn = $_POST["ssn"];
+    $name = $_POST[self::$fullname];
+    $ssn = $_POST[self::$ssn];
 
     if (empty($name) || empty($ssn)) {
       throw new \Exception("All fields must be filled.");
@@ -56,23 +63,23 @@ class ListView
 
   public function userWantsToAddNewMember(): bool
   {
-    return isset($_POST["fullname"]);
+    return isset($_POST[self::$fullname]);
   }
 
   public function userWantsToDeleteMember(): bool
   {
-    return isset($_GET["delete"]);
+    return isset($_GET[self::$delete]);
   }
 
 
   private function userWantsVerboseList(): bool
   {
-    return isset($_GET["verbose"]);
+    return isset($_GET[self::$verbose]);
   }
 
   private function userWantsCompactList(): bool
   {
-    return isset($_GET["compact"]);
+    return isset($_GET[self::$compact]);
   }
 
   private function userEntersSite(): bool
@@ -82,13 +89,13 @@ class ListView
 
   private function createCompactList(): string
   {
-    $listString = '<a href="?verbose">Verbose List</a>';
+    $listString = '<a href="?' . self::$verbose . '">Verbose List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
       $listString .= "<li>$name has " . $this->members[$i]->getBoatCount() . " boat.
-      <a href='?member=" . $id . "'>Manage</a>
-      <a href='?delete=" . $id . "'>Delete</a>
+      <a href='?" . self::$member . "=" . $id . "'>Manage</a>
+      <a href='?" . self::$delete . "=" . $id . "'>Delete</a>
       </li>";
     }
     return $listString;
@@ -96,7 +103,7 @@ class ListView
 
   private function createVerboseList(): string
   {
-    $listString = '<a href="?compact">Compact List</a>';
+    $listString = '<a href="?' . self::$compact . '">Compact List</a>';
     for ($i = 0; $i < sizeof($this->members); $i++) {
       $name = $this->members[$i]->getName();
       $id = $this->members[$i]->getID();
@@ -104,8 +111,8 @@ class ListView
       $boatList = $this->createBoatList($this->members[$i]->getBoats());
 
       $listString .= "<li>$name ($pn), Member ID $id:<br> " . $boatList . "
-      <a href='?member=" . $id . "'>Manage</a>
-      <a href='?delete=" . $id . "'>Delete</a>
+      <a href='?" . self::$member . "=" . $id . "'>Manage</a>
+      <a href='?" . self::$delete . "=" . $id . "'>Delete</a>
       </li>";
     }
     return $listString;
@@ -113,12 +120,12 @@ class ListView
 
   private function createAddMemberForm(): string
   {
-    $ret = "<form action='?compact=' method='post'>
+    $ret = "<form action='?" . self::$compact . "=' method='post'>
 
-    <label for='fullname'>Full Name:</label>
-    <input type='text' name='fullname' placeholder='John Doe'>
-    <label for='ssn'>Social Security Number:</label>
-    <input type='text' name='ssn' placeholder='YYMMDDXXXX'>
+    <label for='" . self::$fullname . "'>Full Name:</label>
+    <input type='text' name='" . self::$fullname . "' placeholder='John Doe'>
+    <label for='" . self::$ssn . "'>Social Security Number:</label>
+    <input type='text' name='" . self::$ssn . "' placeholder='YYMMDDXXXX'>
 
     <input type='submit' value='Add new member'>
 

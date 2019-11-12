@@ -11,12 +11,20 @@ class EditMemberView
 {
   private $ms;
 
+  private static $editMember = "editmember";
+  private static $member = \View\Config\Constants::memberURL;
+
 
   public function __construct(\Model\MemberStorage $mS)
   {
     $this->ms = $mS;
   }
 
+
+  public function wantsEditMemberPage()
+  {
+    return isset($_GET[self::$editMember]);
+  }
 
   public function getUpdatedMemberFromPost(): \Model\Member
   {
@@ -41,7 +49,7 @@ class EditMemberView
    */
   public function response(int $memberID): string
   {
-    $ret = "<form action='?member=$memberID' method='post'>
+    $ret = "<form action='?" . self::$member . "=$memberID' method='post'>
     <input type='submit' value='Save'>";
 
     $member = $this->ms->findMemberByID($memberID);
