@@ -35,6 +35,11 @@ class EditMemberView
     return $_GET[self::$deleteBoat];
   }
 
+  public function getEditMemberID()
+  {
+    return (int) $_GET[\View\Config\Constants::editMemberURL];
+  }
+
   public function getUpdatedMemberFromPost(): \Model\Member
   {
     return new \Model\Member($_POST[self::$id], $_POST[self::$name], $_POST[self::$pn], []);

@@ -44,7 +44,7 @@ class PageView
     } else if ($view instanceof \View\MemberView) {
       return $view->response($view->getUserID());
     } else if ($view instanceof \View\EditMemberView) {
-      return $view->response((int) $_GET["editmember"]);
+      return $view->response($view->getEditMemberID());
     } else if ($view instanceof \View\EditBoatView) {
       return $view->response($_GET["editboat"]);
     }
