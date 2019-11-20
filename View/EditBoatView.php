@@ -26,6 +26,11 @@ class EditBoatView
     return isset($_GET[self::$editBoat]);
   }
 
+  public function getBoatToEdit()
+  {
+    return $_GET[self::$editBoat];
+  }
+
   public function getUpdatedBoatFromPost(): \Model\Boat
   {
     $id = $_POST[self::$id];
